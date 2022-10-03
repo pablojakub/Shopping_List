@@ -14,9 +14,12 @@ const HeaderWrapper = styled.header`
 
 const Title = styled.h2`
     color: white;
-    font-size: clamp(1rem,
-    1.5vw + 1rem,
-    2.5rem);
+    font-size: clamp(1rem, 1.5vw + 1rem, 2.5rem);
+
+    @media only screen and (max-width: 400px) {
+        text-indent: -30px;
+        padding-left: 30px;
+    }
 `;
 
 const TotalPriceWrapper = styled.ul`
@@ -31,7 +34,7 @@ export const Header: React.FunctionComponent = () => {
         <HeaderWrapper>
             <Title>Shopping List</Title>
             <TotalPriceWrapper>
-                <TotalPrice/>
+                <TotalPrice />
             </TotalPriceWrapper>
         </HeaderWrapper>
     );
