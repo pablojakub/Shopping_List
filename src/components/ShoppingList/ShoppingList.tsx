@@ -24,16 +24,17 @@ const DUMMY_PRODUCT_ITEMS: ShoppingListItemType[] = [
 
 const ShoppingListWrapper = styled.section`
   display: flex;
+  gap: 32px;
   flex-direction: column;
   width: 50%;
-  border: 1px solid black;
   align-content: center;
   justify-content: center;
+  margin-top: 32px;
   margin-left: auto;
   margin-right: auto;
 `
 
-const ShoppingListTitle = styled.h3`
+const ShoppingListTitle = styled.h2`
   color: white;
   align-self: center;
 `;
@@ -41,6 +42,8 @@ const ShoppingListTitle = styled.h3`
 const ShoppingListContent = styled.div`
   align-self: center;
   display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
 `;
 
 export const ShoppingList: React.FunctionComponent = () => {
