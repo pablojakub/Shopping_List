@@ -1,7 +1,7 @@
-export interface ShoppingListItem {
+export interface ShoppingListItemType {
   id: string;
   name: string;
   price: number;
-  quantinty: number;
+  quantity: number;
   image: string;
 }

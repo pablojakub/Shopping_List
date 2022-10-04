@@ -1,22 +1,23 @@
 import React from 'react';
-import { ShoppingListItem } from './ShoppingList.types';
+import { ShoppingListItemType } from './ShoppingList.types';
 import  bread from '../../icons/bread.png';
 import milk from '../../icons/milk.png'
 import styled from 'styled-components';
+import ShoppingListItem from './ShoppingListItem/ShoppingListItem';
 
-const DUMMY_PRODUCT_ITEMS: ShoppingListItem[] = [
+const DUMMY_PRODUCT_ITEMS: ShoppingListItemType[] = [
   {
     id: 'bread',
     name: 'Bread',
     price: 4.00,
-    quantinty: 1,
+    quantity: 1,
     image: bread
   },
   {
     id: 'milk',
     name: 'Milk',
     price: 3.70,
-    quantinty: 1,
+    quantity: 1,
     image: bread
   }
 ];
@@ -39,6 +40,7 @@ const ShoppingListTitle = styled.h3`
 
 const ShoppingListContent = styled.div`
   align-self: center;
+  display: grid;
 `;
 
 export const ShoppingList: React.FunctionComponent = () => {
@@ -46,7 +48,15 @@ export const ShoppingList: React.FunctionComponent = () => {
       <ShoppingListWrapper>
         <ShoppingListTitle>Products to buy</ShoppingListTitle>
         <ShoppingListContent>
-          asdsad
+          {DUMMY_PRODUCT_ITEMS.map((item) => (
+            <ShoppingListItem 
+            key={item.id}
+            id={item.id}
+            name={item.name}
+            price={item.price}
+            quantity={item.quantity}
+            image={item.image} />
+          ))}
         </ShoppingListContent>
       </ShoppingListWrapper>
     )
