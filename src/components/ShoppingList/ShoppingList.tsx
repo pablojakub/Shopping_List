@@ -19,6 +19,13 @@ const DUMMY_PRODUCT_ITEMS: ShoppingListItemType[] = [
     price: 3.70,
     quantity: 1,
     image: bread
+  },
+  {
+    id: 'breadrool',
+    name: 'Breadroll',
+    price: 1,
+    quantity: 1,
+    image: bread
   }
 ];
 
@@ -32,6 +39,7 @@ const ShoppingListWrapper = styled.section`
   margin-top: 32px;
   margin-left: auto;
   margin-right: auto;
+  
 `
 
 const ShoppingListTitle = styled.h2`
@@ -42,8 +50,10 @@ const ShoppingListTitle = styled.h2`
 const ShoppingListContent = styled.div`
   align-self: center;
   display: grid;
+  width: 100%;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 8px;
+  background-color: #252424;
 `;
 
 export const ShoppingList: React.FunctionComponent = () => {
