@@ -1,7 +1,9 @@
+import { FunctionComponent, SVGProps } from "react";
+
 export interface ShoppingListItemType {
   id: string;
   name: string;
   price: number;
   quantity: number;
-  image: string;
+  Icon: FunctionComponent<SVGProps<SVGSVGElement>>;
 }

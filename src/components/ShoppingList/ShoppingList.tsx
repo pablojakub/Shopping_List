@@ -1,7 +1,7 @@
 import React from 'react';
 import { ShoppingListItemType } from './ShoppingList.types';
-import  bread from '../../icons/bread.png';
-import milk from '../../icons/milk.png'
+import  {ReactComponent as Bread} from '../../icons/breadbread.svg'
+import {ReactComponent as Milk} from '../../icons/milkmilk.svg'
 import styled from 'styled-components';
 import ShoppingListItem from './ShoppingListItem/ShoppingListItem';
 
@@ -11,21 +11,21 @@ const DUMMY_PRODUCT_ITEMS: ShoppingListItemType[] = [
     name: 'Bread',
     price: 4.00,
     quantity: 1,
-    image: bread
+    Icon: Bread
   },
   {
     id: 'milk',
     name: 'Milk',
     price: 3.70,
     quantity: 1,
-    image: bread
+    Icon: Milk
   },
   {
     id: 'breadrool',
     name: 'Breadroll',
     price: 1,
     quantity: 1,
-    image: bread
+    Icon: Bread
   }
 ];
 
@@ -50,10 +50,9 @@ const ShoppingListTitle = styled.h2`
 const ShoppingListContent = styled.div`
   align-self: center;
   display: grid;
-  width: 100%;
+  width: 50%;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 8px;
-  background-color: #252424;
 `;
 
 export const ShoppingList: React.FunctionComponent = () => {
@@ -68,7 +67,7 @@ export const ShoppingList: React.FunctionComponent = () => {
             name={item.name}
             price={item.price}
             quantity={item.quantity}
-            image={item.image} />
+            Icon={item.Icon} />
           ))}
         </ShoppingListContent>
       </ShoppingListWrapper>

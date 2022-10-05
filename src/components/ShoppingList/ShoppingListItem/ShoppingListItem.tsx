@@ -8,11 +8,25 @@ const Wrapper = styled.div`
   background-color: #1ad1b9;
   border-radius: 5px;
   outline: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.2em;
 `
 
-const ShoppingListItem: React.FunctionComponent<ShoppingListItemType> = (props) => {
+const Name = styled.span`
+  font-size:1rem;
+  font-weight: 700;
+  color: white;
+`
+
+const ShoppingListItem: React.FunctionComponent<ShoppingListItemType> = ({id, name, price, quantity, Icon}) => {
   return (
     <Wrapper onClick={() => console.log("yeah!")}>
+      <Icon width={60} height={60} fill="white"/>
+      <Name>{name}</Name>
+
 
     </Wrapper>
   )
