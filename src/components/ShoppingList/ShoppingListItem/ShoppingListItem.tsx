@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { ShoppingListItemType } from '../ShoppingList.types'
 
 const Wrapper = styled.div`
+  min-width: 150px;
   width: 150px;
   height: 150px;
   background-color: #1ad1b9;
@@ -13,6 +14,12 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 0.2em;
+
+  @media(max-width: 700px) {
+    width: 75px;
+    height: 75px;
+    min-width: 75px;
+  }
 `
 
 const Name = styled.span`
