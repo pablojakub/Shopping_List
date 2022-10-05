@@ -50,6 +50,7 @@ const ShoppingListTitle = styled.h2`
 const ShoppingListContent = styled.div`
   align-self: center;
   display: grid;
+  justify-items: center;
   width: 50%;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 8px;
