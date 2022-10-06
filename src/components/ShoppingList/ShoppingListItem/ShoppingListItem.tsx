@@ -22,17 +22,29 @@ const Wrapper = styled.div`
   }
 `
 
-const Name = styled.span`
-  font-size:1rem;
+const Name = styled.div`
+  font-size: clamp(
+    0.5rem,
+    1.5vw + 0.2rem,
+    1rem);
   font-weight: 700;
+  color: white;
+`
+
+const Price = styled.div`
+  font-size: clamp(
+    0.5rem,
+    2vw + 0.2rem,
+    1rem);;
   color: white;
 `
 
 const ShoppingListItem: React.FunctionComponent<ShoppingListItemType> = ({id, name, price, quantity, Icon}) => {
   return (
     <Wrapper onClick={() => console.log("yeah!")}>
-      <Icon width={60} height={60} fill="white"/>
+      <Icon width={() => 60} height={60} fill="white"/>
       <Name>{name}</Name>
+      <Price>{price}</Price>
 
 
     </Wrapper>
