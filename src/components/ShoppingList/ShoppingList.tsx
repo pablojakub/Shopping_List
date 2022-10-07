@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ShoppingListItemType } from './ShoppingList.types';
 import  {ReactComponent as Bread} from '../../icons/breadbread.svg'
-import {ReactComponent as Milk} from '../../icons/milkmilk.svg'
+import {ReactComponent as Milk} from '../../icons/tetrapack.svg'
+import {ReactComponent as Tomato} from '../../icons/tomato.svg'
 import styled from 'styled-components';
 import ShoppingListItem from './ShoppingListItem/ShoppingListItem';
 
@@ -28,17 +29,17 @@ const DUMMY_PRODUCT_ITEMS: ShoppingListItemType[] = [
     Icon: Bread
   },
   {
-    id: 'other',
-    name: 'Breadroll',
+    id: 'tomato',
+    name: 'Tomato',
     price: 1,
     quantity: 1,
-    Icon: Bread
+    Icon: Tomato
   }
 ];
 
 const ShoppingListWrapper = styled.section`
   display: flex;
-  gap: 32px;
+  gap: 16px;
   flex-direction: column;
   width: 60%;
   align-content: center;
@@ -54,6 +55,7 @@ const ShoppingListWrapper = styled.section`
 
 const ShoppingListTitle = styled.h2`
   color: white;
+  font-size: clamp(1rem, 1vw + 1rem, 1.5rem);
   align-self: center;
 `;
 
@@ -66,11 +68,33 @@ const ShoppingListContent = styled.div`
   flex-wrap: wrap;
 `;
 
+const ArrowButton = styled.button`
+  background: none;
+	color: inherit;
+	border: none;
+	padding-left: 5px;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+
+
+`
+
 export const ShoppingList: React.FunctionComponent = () => {
+  const [isContentOpen, setisContentOpen] = useState(true)
+
+  let leftArrow = String.fromCodePoint(62);
+
+  const showMenuHandler = () => {
+    setisContentOpen(!isContentOpen);
+  }
+
   return (
       <ShoppingListWrapper>
-        <ShoppingListTitle>Products to buy</ShoppingListTitle>
-        <ShoppingListContent>
+        <ShoppingListTitle>Products to buy 
+          <ArrowButton onClick={showMenuHandler}>{leftArrow}</ArrowButton>
+        </ShoppingListTitle>
+        {isContentOpen && <ShoppingListContent>
           {DUMMY_PRODUCT_ITEMS.map((item) => (
             <ShoppingListItem 
             key={item.id}
@@ -80,7 +104,7 @@ export const ShoppingList: React.FunctionComponent = () => {
             quantity={item.quantity}
             Icon={item.Icon} />
           ))}
-        </ShoppingListContent>
+        </ShoppingListContent>}
       </ShoppingListWrapper>
     )
 }
