@@ -3,7 +3,7 @@ import { ShoppingListItemType } from './ShoppingList.types';
 import  {ReactComponent as Bread} from '../../icons/breadbread.svg'
 import {ReactComponent as Milk} from '../../icons/tetrapack.svg'
 import {ReactComponent as Tomato} from '../../icons/tomato.svg'
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import ShoppingListItem from './ShoppingListItem/ShoppingListItem';
 
 const DUMMY_PRODUCT_ITEMS: ShoppingListItemType[] = [
@@ -37,6 +37,25 @@ const DUMMY_PRODUCT_ITEMS: ShoppingListItemType[] = [
   }
 ];
 
+
+const arrowRight = keyframes`
+  from {
+    transform: rotate(0deg)
+  }
+  to {
+    transform: rotate(-45deg)
+  }
+` 
+
+const arrowDown = keyframes`
+  from {
+    transform: rotate(-45deg)
+  }
+  to {
+    transform: rotate(0deg)
+  }
+`
+
 const ShoppingListWrapper = styled.section`
   display: flex;
   gap: 16px;
@@ -68,7 +87,7 @@ const ShoppingListContent = styled.div`
   flex-wrap: wrap;
 `;
 
-const ArrowButton = styled.button`
+const ArrowButton = styled.button<{menuOpen: boolean}>`
   background: none;
 	color: inherit;
 	border: none;
@@ -76,23 +95,29 @@ const ArrowButton = styled.button`
 	font: inherit;
 	cursor: pointer;
 	outline: inherit;
-
-
-`
+  animation: ${props => (props.menuOpen 
+    ? arrowDown 
+    : '')} 100ms;
+  animation-fill-mode: ${props => (props.menuOpen 
+    ? 'forwards'
+    : 'backwards')};
+`;
 
 export const ShoppingList: React.FunctionComponent = () => {
-  const [isContentOpen, setisContentOpen] = useState(true)
-
-  let leftArrow = String.fromCodePoint(62);
+  const [isContentOpen, setisContentOpen] = useState(true);
 
   const showMenuHandler = () => {
     setisContentOpen(!isContentOpen);
   }
 
+  let leftArrow = String.fromCodePoint(0x2B62);
+  let downArrow = String.fromCodePoint(0x2193);
+
+
   return (
       <ShoppingListWrapper>
         <ShoppingListTitle>Products to buy 
-          <ArrowButton onClick={showMenuHandler}>{leftArrow}</ArrowButton>
+          <ArrowButton menuOpen={isContentOpen} onClick={showMenuHandler}>{isContentOpen ? downArrow : leftArrow}</ArrowButton>
         </ShoppingListTitle>
         {isContentOpen && <ShoppingListContent>
           {DUMMY_PRODUCT_ITEMS.map((item) => (
