@@ -18,9 +18,18 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "preserve",
+    "incremental": true
   },
   "include": [
-    "src"
+    "src",
+    "public/icons",
+    "public/index.tsx",
+    "pages/index.tsx",
+    "styles/GlobalStyles.tsx",
+    "public/icons/custom.d.ts"
+  ],
+  "exclude": [
+    "node_modules"
   ]
 }
