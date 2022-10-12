@@ -44,5 +44,8 @@
   },
   "resolutions": {
     "styled-components": "^5.3.6"
+  },
+  "devDependencies": {
+    "eslint-config-react-app": "^7.0.1"
   }
 }
