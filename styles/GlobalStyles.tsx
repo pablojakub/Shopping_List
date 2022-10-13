@@ -12,19 +12,49 @@ const GlobalStyles = createGlobalStyle`
 html, body {
   height: 100%;
   font-family: 'Noto Sans', sans-serif;
+  
 }
+
+
+
 
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   background-color: #3f3f3f;
+  background-image: url('/backgroud.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 } 
+
+@media
+    (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 2dppx)
+  {
+    body {
+      background-image:
+        url('/backgroud@2.png');
+        background-size: 800px;
+    }
+  }
+  
+  @media
+    (-webkit-min-device-pixel-ratio: 3),
+    (min-resolution: 3dppx)
+  {
+    body {
+      background-image:
+        url('/backgroud3x.png');
+        background-size: 350px;
+    }
+}
 
 @font-face {
   font-family: 'Noto Sans';
   font-style: normal;
   font-weight: 400;
-  src: url('../fonts/noto-sans-v27-latin-regular.eot'); /* IE9 Compat Modes */
+  src: url('/../fonts/noto-sans-v27-latin-regular.eot'); /* IE9 Compat Modes */
   src: local(''),
        url('../fonts/noto-sans-v27-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
        url('../fonts/noto-sans-v27-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */

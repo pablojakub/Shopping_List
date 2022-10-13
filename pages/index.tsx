@@ -1,32 +1,33 @@
-import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
 
-const ImageWrapper = styled.div`
-display: block;
-z-index: 0;
+const Wrapper = styled.div`
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  height: 30%;
+  width: 50%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `
-
 
 const WelcomeText = styled.h1`
   color: white;
-  z-index: 1;
-  position: relative;
-  width: fit-content;
   font-size: clamp(1rem, 1.5vw + 1rem, 2.5rem);
-  left: 50%;
-  transform: translateX(-50%);
 `
 
 
 export default function App() {
   return (
-    <>
-    <ImageWrapper>
-        <Image src="/../public/backgroud.png" layout="fill" />
-        </ImageWrapper>
-        <WelcomeText>Hello my friend!</WelcomeText>
-    </>
+    <Wrapper>
+        <WelcomeText>Your shopping lists:</WelcomeText>
+        <Link href='/homelist'>Idź do swojej listy</Link>
+    </Wrapper>
   );
 }
 
