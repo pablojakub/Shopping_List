@@ -2,6 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
 import ListItem from '../components/Layout/ListItem'
+import * as clientPromise from '../lib/mongodb'
 
 const Wrapper = styled.div`
   position: absolute;
@@ -33,7 +34,7 @@ const DUMMY_LIST = [{
 ]
 
 
-export default function App() {
+export default function App(props: any) {
   return (
     <Wrapper>
         <WelcomeText>Your shopping lists:</WelcomeText>
@@ -45,8 +46,24 @@ export default function App() {
             </ListItem>
           )
         })}
-        
+        <h1> {props.isConnected ? 'UDAŁO SIĘ!' : 'ŁEEEE'}</h1>
     </Wrapper>
   );
+}
+
+export async function getServerSideProps() {
+
+  let isConnected: boolean;
+  try {
+    const client = await clientPromise
+    isConnected = true;
+  } catch(e) {
+    console.log(e);
+    isConnected = false;
+  }
+
+  return {
+    props: { isConnected },
+  }
 }
 
