@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
 import ListItem from '../components/Layout/ListItem'
-import * as clientPromise from '../lib/mongodb'
+import clientPromise from '../lib/mongodb'
 
 const Wrapper = styled.div`
   position: absolute;
@@ -46,24 +46,22 @@ export default function App(props: any) {
             </ListItem>
           )
         })}
-        <h1> {props.isConnected ? 'UDAŁO SIĘ!' : 'ŁEEEE'}</h1>
     </Wrapper>
   );
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
 
-  let isConnected: boolean;
-  try {
-    const client = await clientPromise
-    isConnected = true;
-  } catch(e) {
-    console.log(e);
-    isConnected = false;
-  }
+  const client = await clientPromise;
+  const database = client.db('shoppinglist');
+  const shoppingTypeCollection = database.collection('shoppingtypes');
+
+ const shoppingTypes = await shoppingTypeCollection.find().toArray();
 
   return {
-    props: { isConnected },
+    props: { 
+      shoppingTypes
+     },
   }
 }
 
