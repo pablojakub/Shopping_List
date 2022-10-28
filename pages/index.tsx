@@ -1,3 +1,4 @@
+import { ObjectId } from 'mongodb';
 import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
@@ -23,26 +24,23 @@ const WelcomeText = styled.h1`
   font-size: clamp(1rem, 1.5vw + 1rem, 2.5rem);
 `
 
-const DUMMY_LIST = [{
-  id: 'homeList',
-  name: 'Home List'
-},
-{
-  id: 'otherList',
-  name: 'Other List'
+type ShoppingType = {
+  name: string,
+  id: string,
 }
-]
 
 
 export default function App(props: any) {
+  console.log(props.shoppingTypes)
   return (
     <Wrapper>
         <WelcomeText>Your shopping lists:</WelcomeText>
-        {DUMMY_LIST.map((list) => {
+        {props.shoppingTypes.map((shoppingType: ShoppingType) => {
+          console.log(shoppingType)
           return (
             <ListItem
-              key={list.id}
-            ><Link href='/homelist' style={{ color:'3f3f3f', textDecoration: 'none' }}>{list.name}</Link>
+              key={shoppingType.id}
+            ><Link href={'/' + shoppingType.id}>{shoppingType.name}</Link>
             </ListItem>
           )
         })}
@@ -60,7 +58,10 @@ export async function getStaticProps() {
 
   return {
     props: { 
-      shoppingTypes
+      shoppingTypes: shoppingTypes.map(shoppingType => ({
+        name: shoppingType.name,
+        id: shoppingType._id.toString(),
+      }))
      },
   }
 }
