@@ -5,11 +5,11 @@ import clientPromise from '../../lib/mongodb'
 import mongoose from 'mongoose';
 
 export default function HomeList(props) {
-  console.log(props.shoppingList)
+  const shoppingListItems = JSON.parse(props.shoppingList);
   return (
     <>
     <Header/>
-    <ShoppingList/>
+    <ShoppingList shoppingListItems={shoppingListItems.shoppingList}/>
     </>
   );
 }

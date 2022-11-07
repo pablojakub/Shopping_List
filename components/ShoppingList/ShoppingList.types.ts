@@ -5,5 +5,9 @@ export interface ShoppingListItemType {
   name: string;
   price: number;
   quantity: number;
-  Icon: FunctionComponent<SVGProps<SVGSVGElement>>;
+  icon: number;
+}
+
+export interface ShoppingListProps {
+  shoppingListItems: ShoppingListItemType[]
 }
