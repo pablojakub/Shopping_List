@@ -10,7 +10,6 @@ const ShoppingListItem: React.FunctionComponent<ShoppingListItemType> = ({id, na
   return (
     <Wrapper onClick={() => console.log("yeah!")}>
       <Image src={`/${svgPath}`} width={60} height={60}/>
-      {/* <Icon width={60} height={60} fill="white"/> */}
       <Name>{name}</Name>
       <Price>{price} zł</Price>
     </Wrapper>

@@ -6,9 +6,14 @@ import mongoose from 'mongoose';
 
 export default function HomeList(props) {
   const shoppingListItems = JSON.parse(props.shoppingList);
+
+  const totalPrice = shoppingListItems.shoppingList
+  .map(item => item.price)
+  .reduce((prevVal, currVal) => prevVal + currVal, 0);
+
   return (
     <>
-    <Header/>
+    <Header totalPrice={totalPrice}/>
     <ShoppingList shoppingListItems={shoppingListItems.shoppingList}/>
     </>
   );
