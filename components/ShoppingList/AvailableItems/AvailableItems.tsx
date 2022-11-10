@@ -1,4 +1,5 @@
 import React from 'react'
+import { ShoppingListContent, ShoppingListTitle } from '../../../styles/ShoppingList.styled';
 import ShoppingListItem from '../ShoppingListItem/ShoppingListItem';
 
 interface AvailableItem {
@@ -16,6 +17,8 @@ export const AvailableItems: React.FunctionComponent<AvailableItemsProps> = ({av
   console.log(availableItems.length)
   return (
     <>
+    <ShoppingListTitle> Available products</ShoppingListTitle>
+    <ShoppingListContent>
     { availableItems.map((item) => (
       <ShoppingListItem
         key={item.id}
@@ -26,6 +29,8 @@ export const AvailableItems: React.FunctionComponent<AvailableItemsProps> = ({av
         isAdded={false}
         />
     ))} 
+    </ShoppingListContent>
     </>
+    
   )
 }

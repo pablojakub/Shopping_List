@@ -13,6 +13,7 @@ export const HeaderWrapper = styled.header`
 export const Title = styled.h2`
     color: white;
     font-size: clamp(1rem, 1.5vw + 1rem, 2.5rem);
+    cursor: pointer;
 
     @media only screen and (max-width: 400px) {
         text-indent: -30px;

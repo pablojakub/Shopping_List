@@ -47,6 +47,7 @@ justify-content: center;
 width: 100%;
 gap: 8px;
 flex-wrap: wrap;
+margin-bottom: 64px;
 `;
 
 export const ArrowButton = styled.button<{menuOpen: boolean}>`
