@@ -6,15 +6,10 @@ import mongoose from 'mongoose';
 
 export default function HomeList(props) {
   const shoppingListItems = JSON.parse(props.shoppingList);
-  const totalPrice = shoppingListItems.shoppingList;
-  
-  if (totalPrice === undefined) {
-    return null
-  } else {
-    totalPrice.map(item => item.price)
+
+  const totalPrice = shoppingListItems.shoppingList
+    .map(item => item.price)
     .reduce((prevVal, currVal) => prevVal + currVal, 0);
-  }
-    
 
   return (
     <>
