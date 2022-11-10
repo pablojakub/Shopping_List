@@ -4,8 +4,9 @@ export interface ShoppingListItemType {
   id: string;
   name: string;
   price: number;
-  quantity: number;
+  quantity?: number;
   icon: number;
+  isAdded: boolean;
 }
 
 export interface ShoppingListProps {

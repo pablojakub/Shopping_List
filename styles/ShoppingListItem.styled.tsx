@@ -1,10 +1,10 @@
 import styled from "styled-components"
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<{isAdded: boolean}>`
   min-width: 150px;
   width: 150px;
   height: 150px;
-  background-color: #1ad1b9;
+  background-color: ${props => props.isAdded ? '#1ad1b9' : '#d11a32'} ;
   border-radius: 5px;
   outline: none;
   display: flex;
