@@ -3,6 +3,7 @@ import { Header } from '../../components/Header/Header';
 import { ShoppingList } from '../../components/ShoppingList/ShoppingList';
 import clientPromise from '../../lib/mongodb'
 import mongoose from 'mongoose';
+import { AvailableItems } from '../../components/ShoppingList/AvailableItems/AvailableItems';
 
 export default function HomeList(props) {
   const shoppingListItems = JSON.parse(props.shoppingList);
@@ -15,6 +16,7 @@ export default function HomeList(props) {
     <>
     <Header totalPrice={totalPrice}/>
     <ShoppingList shoppingListItems={shoppingListItems.shoppingList}/>
+    <AvailableItems availableItems={shoppingListItems.shoppingList} />
     </>
   );
 }
@@ -50,7 +52,18 @@ export async function getStaticProps(context) {
  const objId = new mongoose.Types.ObjectId(shoppingListTypeId)
 
  const selectedShoppingType = await shoppingTypesColl.findOne({_id: objId});
- const serialized = JSON.stringify(selectedShoppingType)
+
+if (!selectedShoppingType!.shoppingList) { 
+  return {
+    redirect: {
+      destination: '/ups',
+      permanent: false
+
+    }
+  }
+}
+
+const serialized = JSON.stringify(selectedShoppingType);
 
   return {
     props: {

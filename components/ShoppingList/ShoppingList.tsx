@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { ShoppingListProps } from './ShoppingList.types';
 import ShoppingListItem from './ShoppingListItem/ShoppingListItem';
 import { ShoppingListWrapper, ShoppingListContent, ShoppingListTitle, ArrowButton } from '../../styles/ShoppingList.styled'
-import { AvailableItems } from './AvailableItems/AvailableItems';
 
 
 
@@ -34,7 +33,6 @@ export const ShoppingList: React.FunctionComponent<ShoppingListProps> = (props) 
             isAdded/>
           ))}
         </ShoppingListContent>}
-        <AvailableItems availableItems={props.shoppingListItems} />
       </ShoppingListWrapper>
     )
 }

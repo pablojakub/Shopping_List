@@ -1,5 +1,5 @@
 import React from 'react'
-import { ShoppingListContent, ShoppingListTitle } from '../../../styles/ShoppingList.styled';
+import { ShoppingListContent, ShoppingListTitle, ShoppingListWrapper } from '../../../styles/ShoppingList.styled';
 import ShoppingListItem from '../ShoppingListItem/ShoppingListItem';
 
 interface AvailableItem {
@@ -16,7 +16,7 @@ interface AvailableItemsProps {
 export const AvailableItems: React.FunctionComponent<AvailableItemsProps> = ({availableItems}) => {
   console.log(availableItems.length)
   return (
-    <>
+    <ShoppingListWrapper>
     <ShoppingListTitle> Available products</ShoppingListTitle>
     <ShoppingListContent>
     { availableItems.map((item) => (
@@ -30,7 +30,7 @@ export const AvailableItems: React.FunctionComponent<AvailableItemsProps> = ({av
         />
     ))} 
     </ShoppingListContent>
-    </>
+    </ShoppingListWrapper>
     
   )
 }
