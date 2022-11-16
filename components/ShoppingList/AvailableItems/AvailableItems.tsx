@@ -6,7 +6,7 @@ interface AvailableItem {
   id: string;
   name: string;
   price: number;
-  icon: number; 
+  iconId: number; 
 }
 
 interface AvailableItemsProps {
@@ -14,7 +14,6 @@ interface AvailableItemsProps {
 }
 
 export const AvailableItems: React.FunctionComponent<AvailableItemsProps> = ({availableItems}) => {
-  console.log(availableItems.length)
   return (
     <ShoppingListWrapper>
     <ShoppingListTitle> Available products</ShoppingListTitle>
@@ -25,7 +24,7 @@ export const AvailableItems: React.FunctionComponent<AvailableItemsProps> = ({av
         id={item.id}
         name={item.name}
         price={item.price}
-        icon={item.icon}
+        iconId={item.iconId}
         isAdded={false}
         />
     ))} 

@@ -19,7 +19,7 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   background-color: #3f3f3f;
-  background-image: url('/backgroud.png');
+  background-image: url('/backgroud@1.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

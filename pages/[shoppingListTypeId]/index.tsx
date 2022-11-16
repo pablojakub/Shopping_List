@@ -12,6 +12,7 @@ export default function HomeList(props) {
     .map(item => item.price)
     .reduce((prevVal, currVal) => prevVal + currVal, 0);
 
+
   return (
     <>
     <Header totalPrice={totalPrice}/>

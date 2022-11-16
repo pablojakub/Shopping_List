@@ -29,7 +29,7 @@ export const ShoppingList: React.FunctionComponent<ShoppingListProps> = (props) 
             name={item.name}
             price={item.price}
             quantity={item.quantity}
-            icon={item.icon} 
+            iconId={item.iconId} 
             isAdded/>
           ))}
         </ShoppingListContent>}

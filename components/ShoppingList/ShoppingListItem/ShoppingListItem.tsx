@@ -4,8 +4,8 @@ import { ShoppingListItemType } from '../ShoppingList.types'
 import { Wrapper, Name, Price } from '../../../styles/ShoppingListItem.styled'
 import { SVG_IDS } from '../../../public/constants';
 
-const ShoppingListItem: React.FunctionComponent<ShoppingListItemType> = ({id, name, price, quantity, icon, isAdded}) => {
-  const svgPath = SVG_IDS[icon];
+const ShoppingListItem: React.FunctionComponent<ShoppingListItemType> = ({id, name, price, quantity, iconId, isAdded}) => {
+  const svgPath = SVG_IDS[iconId];
 
   return (
     <Wrapper onClick={() => console.log("yeah!")} isAdded={isAdded}>
