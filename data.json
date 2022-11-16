@@ -1,0 +1,245 @@
+{
+  "name": "Home List",
+  "shoppingList": [
+    {
+      "id": "m1",
+      "name": "Milk",
+      "quantity": 1,
+      "iconId": 1,
+      "price": 4,
+      "isAdded": true
+    },
+    {
+      "id": "m2",
+      "name": "Tomato",
+      "quantity": 1,
+      "iconId": 2,
+      "price": 3,
+      "isAdded": true
+    },
+    {
+      "id": "m3",
+      "name": "Potato",
+      "quantity": 1,
+      "iconId": 3,
+      "price": 3,
+      "isAdded": false
+    },
+    {
+      "id": "m4",
+      "name": "Bread",
+      "quantity": 1,
+      "iconId": 4,
+      "price": 4,
+      "isAdded": false
+    },
+    {
+      "id": "m5",
+      "name": "Oat Milk",
+      "quantity": 1,
+      "iconId": 5,
+      "price": 5,
+      "isAdded": false
+    },
+    {
+      "id": "m6",
+      "name": "Tomato Juice",
+      "quantity": 1,
+      "iconId": 6,
+      "price": 3,
+      "isAdded": false
+    },
+    {
+      "id": "m7",
+      "name": "Bananas",
+      "quantity": 1,
+      "iconId": 7,
+      "price": 5,
+      "isAdded": false
+    },
+    {
+      "id": "m8",
+      "name": "Pistachio",
+      "quantity": 1,
+      "iconId": 8,
+      "price": 16,
+      "isAdded": false
+    },
+    {
+      "id": "m9",
+      "name": "Walnuts",
+      "quantity": 1,
+      "iconId": 9,
+      "price": 12,
+      "isAdded": false
+    },
+    {
+      "id": "m10",
+      "name": "Cured Meat",
+      "quantity": 1,
+      "iconId": 10,
+      "price": 9,
+      "isAdded": false
+    },
+    {
+      "id": "m11",
+      "name": "Pasta",
+      "quantity": 1,
+      "iconId": 11,
+      "price": 4,
+      "isAdded": false
+    },
+    {
+      "id": "m12",
+      "name": "Water",
+      "quantity": 1,
+      "iconId": 12,
+      "price": 3,
+      "isAdded": false
+    },
+    {
+      "id": "m13",
+      "name": "Eggs",
+      "quantity": 1,
+      "iconId": 13,
+      "price": 8,
+      "isAdded": false
+    },
+    {
+      "id": "m14",
+      "name": "Flour",
+      "quantity": 1,
+      "iconId": 14,
+      "price": 3,
+      "isAdded": false
+    },
+    {
+      "id": "m15",
+      "name": "Cream",
+      "quantity": 1,
+      "iconId": 15,
+      "price": 3,
+      "isAdded": false
+    },
+    {
+      "id": "m16",
+      "name": "Butter",
+      "quantity": 1,
+      "iconId": 16,
+      "price": 8,
+      "isAdded": false
+    },
+    {
+      "id": "m17",
+      "name": "Yellow Cheese",
+      "quantity": 1,
+      "iconId": 17,
+      "price": 8,
+      "isAdded": false
+    },
+    {
+      "id": "m18",
+      "name": "Yoghurt",
+      "quantity": 1,
+      "iconId": 18,
+      "price": 2,
+      "isAdded": false
+    },
+    {
+      "id": "m19",
+      "name": "Salmon",
+      "quantity": 1,
+      "iconId": 19,
+      "price": 13,
+      "isAdded": false
+    },
+    {
+      "id": "m20",
+      "name": "Cod",
+      "quantity": 1,
+      "iconId": 20,
+      "price": 18,
+      "isAdded": false
+    },
+    {
+      "id": "m21",
+      "name": "Chicken breast",
+      "quantity": 1,
+      "iconId": 21,
+      "price": 18,
+      "isAdded": false
+    },
+    {
+      "id": "m22",
+      "name": "Salad",
+      "quantity": 1,
+      "iconId": 22,
+      "price": 5,
+      "isAdded": false
+    },
+    {
+      "id": "m23",
+      "name": "Leek",
+      "quantity": 1,
+      "iconId": 23,
+      "price": 4,
+      "isAdded": false
+    },
+    {
+      "id": "m24",
+      "name": "Carrot",
+      "quantity": 1,
+      "iconId": 24,
+      "price": 4,
+      "isAdded": false
+    },
+    {
+      "id": "m25",
+      "name": "Milk",
+      "quantity": 1,
+      "iconId": 1,
+      "price": 4,
+      "isAdded": false
+    },
+    {
+      "id": "m25",
+      "name": "Pepper",
+      "quantity": 1,
+      "iconId": 25,
+      "price": 3,
+      "isAdded": false
+    },
+    {
+      "id": "m26",
+      "name": "Tea",
+      "quantity": 1,
+      "iconId": 26,
+      "price": 2,
+      "isAdded": false
+    },
+    {
+      "id": "m27",
+      "name": "Coffee",
+      "quantity": 1,
+      "iconId": 27,
+      "price": 18,
+      "isAdded": false
+    },
+    {
+      "id": "m28",
+      "name": "Chocolate",
+      "quantity": 1,
+      "iconId": 28,
+      "price": 4,
+      "isAdded": false
+    },
+    {
+      "id": "m29",
+      "name": "Apple",
+      "quantity": 1,
+      "iconId": 29,
+      "price": 4,
+      "isAdded": false
+    }
+  ]
+}
