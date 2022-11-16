@@ -25,17 +25,17 @@ export async function getStaticPaths() {
 
   const client = await clientPromise;
   const database = client.db('shoppinglist');
-  const shoppingTypesColl = database.collection('shoppingtypes');
+  const shoppingTypesColl = database.collection('shoppinglist');
 
   // first param in find() filter criteria second is which property should be returned
-  const shoppingTypes = await shoppingTypesColl.find().toArray();
+  const shoppingLists = await shoppingTypesColl.find().toArray();
 
   return {
     //false means that we sepcified all supported paths. m3 for example wouldn't be readed. (404)
     fallback: 'blocking',
-    paths: shoppingTypes.map((shoppingType) => ({
+    paths: shoppingLists.map((shoppingList) => ({
       params: { 
-        shoppingListTypeId: shoppingType._id.toString() 
+        shoppingListTypeId: shoppingList._id.toString() 
       },
     }))
   }
@@ -47,7 +47,7 @@ export async function getStaticProps(context) {
 
  const client = await clientPromise;
  const database = client.db('shoppinglist');
- const shoppingTypesColl = database.collection('shoppingtypes');
+ const shoppingTypesColl = database.collection('shoppinglist');
 
  const objId = new mongoose.Types.ObjectId(shoppingListTypeId)
 

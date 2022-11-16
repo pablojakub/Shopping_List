@@ -2,7 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/[shoppingListTypeId]": "pages/[shoppingListTypeId].js",
   "/": "pages/index.js",
-  "/ups": "pages/ups.js"
+  "/[shoppingListTypeId]": "pages/[shoppingListTypeId].js"
 }

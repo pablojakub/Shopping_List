@@ -30,16 +30,16 @@ type ShoppingType = {
 
 
 export default function App(props: any) {
-  console.log(props.shoppingTypes)
+  console.log(props.shoppingLists)
   return (
     <Wrapper>
         <WelcomeText>Your shopping lists:</WelcomeText>
-        {props.shoppingTypes.map((shoppingType: ShoppingType) => {
-          console.log(shoppingType)
+        {props.shoppingLists.map((shoppingList: ShoppingType) => {
+          console.log(shoppingList)
           return (
             <ListItem
-              key={shoppingType.id}
-            ><Link href={'/' + shoppingType.id}>{shoppingType.name}</Link>
+              key={shoppingList.id}
+            ><Link href={'/' + shoppingList.id}>{shoppingList.name}</Link>
             </ListItem>
           )
         })}
@@ -51,15 +51,15 @@ export async function getStaticProps() {
 
   const client = await clientPromise;
   const database = client.db('shoppinglist');
-  const shoppingTypeCollection = database.collection('shoppingtypes');
+  const shoppingListCollection = database.collection('shoppinglist');
 
- const shoppingTypes = await shoppingTypeCollection.find().toArray();
+ const shoppingLists = await shoppingListCollection.find().toArray();
 
   return {
     props: { 
-      shoppingTypes: shoppingTypes.map(shoppingType => ({
-        name: shoppingType.name,
-        id: shoppingType._id.toString(),
+      shoppingLists: shoppingLists.map(shoppingList => ({
+        name: shoppingList.name,
+        id: shoppingList._id.toString(),
       }))
      },
   }
