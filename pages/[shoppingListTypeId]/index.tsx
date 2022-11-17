@@ -1,12 +1,13 @@
 import React from 'react';
 import { Header } from '../../components/Header/Header';
-import { ShoppingList } from '../../components/ShoppingList/ShoppingList';
+import { ShoppingListLayout } from '../../components/ShoppingList/ShoppingList';
 import clientPromise from '../../lib/mongodb'
 import mongoose from 'mongoose';
-import { AvailableItems } from '../../components/ShoppingList/AvailableItems/AvailableItems';
 
 export default function HomeList(props) {
   const shoppingListItems = JSON.parse(props.shoppingList);
+  const availableItems = shoppingListItems.shoppingList.filter(obj => obj.isAdded === false);
+  const addedItems = shoppingListItems.shoppingList.filter(obj => obj.isAdded === true)
 
   const totalPrice = shoppingListItems.shoppingList
     .map(item => item.price)
@@ -16,8 +17,8 @@ export default function HomeList(props) {
   return (
     <>
     <Header totalPrice={totalPrice}/>
-    <ShoppingList shoppingListItems={shoppingListItems.shoppingList}/>
-    <AvailableItems availableItems={shoppingListItems.shoppingList} />
+    <ShoppingListLayout isShoppingList shoppingListItems={addedItems}/>
+    <ShoppingListLayout isShoppingList={false} shoppingListItems={availableItems}/>
     </>
   );
 }

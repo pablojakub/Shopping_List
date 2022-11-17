@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { ShoppingListProps } from './ShoppingList.types';
+import { ShoppingListLayoutProps } from './ShoppingList.types';
 import ShoppingListItem from './ShoppingListItem/ShoppingListItem';
 import { ShoppingListWrapper, ShoppingListContent, ShoppingListTitle, ArrowButton } from '../../styles/ShoppingList.styled'
 
 
 
-export const ShoppingList: React.FunctionComponent<ShoppingListProps> = (props) => {
+export const ShoppingListLayout: React.FunctionComponent<ShoppingListLayoutProps> = (props) => {
   const [isContentOpen, setisContentOpen] = useState(true);
 
   const showMenuHandler = () => {
@@ -18,7 +18,7 @@ export const ShoppingList: React.FunctionComponent<ShoppingListProps> = (props) 
 
   return (
       <ShoppingListWrapper>
-        <ShoppingListTitle>Products to buy 
+        <ShoppingListTitle>{props.isShoppingList ? 'Products to buy' : 'Available Products'} 
           <ArrowButton menuOpen={isContentOpen} onClick={showMenuHandler}>{isContentOpen ? downArrow : leftArrow}</ArrowButton>
         </ShoppingListTitle>
         {isContentOpen && <ShoppingListContent>
@@ -30,7 +30,7 @@ export const ShoppingList: React.FunctionComponent<ShoppingListProps> = (props) 
             price={item.price}
             quantity={item.quantity}
             iconId={item.iconId} 
-            isAdded/>
+            isAdded={props.isShoppingList}/>
           ))}
         </ShoppingListContent>}
       </ShoppingListWrapper>

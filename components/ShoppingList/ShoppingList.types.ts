@@ -7,6 +7,7 @@ export interface ShoppingListItemType {
   isAdded: boolean;
 }
 
-export interface ShoppingListProps {
+export interface ShoppingListLayoutProps {
+  isShoppingList: boolean;
   shoppingListItems: ShoppingListItemType[]
 }
