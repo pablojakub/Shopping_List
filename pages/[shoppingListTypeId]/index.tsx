@@ -33,7 +33,6 @@ export async function getStaticPaths() {
   const shoppingLists = await shoppingTypesColl.find().toArray();
 
   return {
-    //false means that we sepcified all supported paths. m3 for example wouldn't be readed. (404)
     fallback: 'blocking',
     paths: shoppingLists.map((shoppingList) => ({
       params: { 
