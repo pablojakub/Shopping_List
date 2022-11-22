@@ -30,12 +30,10 @@ type ShoppingType = {
 
 
 export default function App(props: any) {
-  console.log(props.shoppingLists)
   return (
     <Wrapper>
         <WelcomeText>Your shopping lists:</WelcomeText>
         {props.shoppingLists.map((shoppingList: ShoppingType) => {
-          console.log(shoppingList)
           return (
             <ListItem
               key={shoppingList.id}
@@ -62,6 +60,7 @@ export async function getStaticProps() {
         id: shoppingList._id.toString(),
       }))
      },
+     revalidate: 1
   }
 }
 

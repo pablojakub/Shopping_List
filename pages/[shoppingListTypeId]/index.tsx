@@ -7,18 +7,26 @@ import mongoose from 'mongoose';
 export default function HomeList(props) {
   const shoppingListItems = JSON.parse(props.shoppingList);
   const availableItems = shoppingListItems.shoppingList.filter(obj => obj.isAdded === false);
-  const addedItems = shoppingListItems.shoppingList.filter(obj => obj.isAdded === true)
+  const addedItems = shoppingListItems.shoppingList.filter(obj => obj.isAdded === true);
+
+  console.log(addedItems);
 
   const totalPrice = shoppingListItems.shoppingList
+    .filter(obj => obj.isAdded === true)
     .map(item => item.price)
     .reduce((prevVal, currVal) => prevVal + currVal, 0);
-
 
   return (
     <>
     <Header totalPrice={totalPrice}/>
-    <ShoppingListLayout isShoppingList shoppingListItems={addedItems}/>
-    <ShoppingListLayout isShoppingList={false} shoppingListItems={availableItems}/>
+    <ShoppingListLayout 
+    isShoppingList 
+    shoppingListItems={addedItems} 
+    shoppingListName={shoppingListItems.name}/>
+    <ShoppingListLayout 
+    isShoppingList={false} 
+    shoppingListItems={availableItems}
+    shoppingListName={shoppingListItems.name}/>
     </>
   );
 }
@@ -69,6 +77,7 @@ const serialized = JSON.stringify(selectedShoppingType);
   return {
     props: {
       shoppingList: serialized
-    }
+    },
+    revalidate: 1
   }
 }

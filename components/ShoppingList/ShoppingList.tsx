@@ -30,7 +30,8 @@ export const ShoppingListLayout: React.FunctionComponent<ShoppingListLayoutProps
             price={item.price}
             quantity={item.quantity}
             iconId={item.iconId} 
-            isAdded={props.isShoppingList}/>
+            isAdded={props.isShoppingList}
+            shoppingListName={props.shoppingListName}/>
           ))}
         </ShoppingListContent>}
       </ShoppingListWrapper>

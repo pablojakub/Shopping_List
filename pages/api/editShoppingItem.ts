@@ -1,24 +1,26 @@
 // api/editShoppingItem
-import mongoose from 'mongoose';
 import clientPromise from '../../lib/mongodb'
 
 const handler = async (req, res) => {
-  if (req.method === 'GET') {
+  if (req.method === 'PUT') {
     const data = req.body;
-    const { id, shoppingListId } = data;
-    const collectionId = new mongoose.Types.ObjectId(shoppingListId);
+    const { id, shoppingListName, isAdded } = data;
 
     const client = await clientPromise;
     const database = client.db('shoppinglist');
     const shoppingListCollection = database.collection('shoppinglist');
-    const shoppingList = await shoppingListCollection.findOne({ _id: collectionId });
-
-    const shoppingListItem = shoppingList!.find(item => item.id === id);
-    shoppingListItem.isAdded = !shoppingListItem.isAdded
-
-    // console.log(shoppingListItem)
-
-    res.status(201).json({ message: id })
+    const result = await shoppingListCollection.updateOne(
+      {
+        "name": shoppingListName,
+        "shoppingList.id": id,
+      },
+      {
+        '$set': {
+          "shoppingList.$.isAdded": !isAdded
+        }
+      }
+    )
+    res.status(201).json({ message: 'Udało się' })
   }
 }
 
