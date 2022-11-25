@@ -1,20 +1,45 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Header } from '../../components/Header/Header';
-import { ShoppingListLayout } from '../../components/ShoppingList/ShoppingList';
+import { ShoppingListLayout } from '../../components/ShoppingList/ShoppingListLayout';
 import clientPromise from '../../lib/mongodb'
 import mongoose from 'mongoose';
+import { itemData } from '../../components/ShoppingList/ShoppingListItem/ShoppingListItem.types';
+import { useRouter } from 'next/router';
 
 export default function HomeList(props) {
   const shoppingListItems = JSON.parse(props.shoppingList);
   const availableItems = shoppingListItems.shoppingList.filter(obj => obj.isAdded === false);
   const addedItems = shoppingListItems.shoppingList.filter(obj => obj.isAdded === true);
-
-  console.log(addedItems);
-
   const totalPrice = shoppingListItems.shoppingList
     .filter(obj => obj.isAdded === true)
     .map(item => item.price)
     .reduce((prevVal, currVal) => prevVal + currVal, 0);
+
+  const [isRefreeshing, setIsRefreshing] = useState<boolean>(false);
+
+  const router = useRouter();
+  const refreshData = () => {
+    router.replace(router.asPath);
+    setIsRefreshing(true);
+  }
+
+useEffect(() => {
+  setIsRefreshing(false);
+},[props.shoppingList])
+  
+  const addItemHandler = async (data: itemData) => {
+
+    const result = await fetch('/api/editShoppingItem', {
+      method: 'PUT',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type' : 'application/json'
+      }
+    })
+    if(result.status < 300) {
+      refreshData();
+    }
+  }
 
   return (
     <>
@@ -22,11 +47,15 @@ export default function HomeList(props) {
     <ShoppingListLayout 
     isShoppingList 
     shoppingListItems={addedItems} 
-    shoppingListName={shoppingListItems.name}/>
+    shoppingListName={shoppingListItems.name}
+    onAddItem={addItemHandler}
+    />
     <ShoppingListLayout 
     isShoppingList={false} 
     shoppingListItems={availableItems}
-    shoppingListName={shoppingListItems.name}/>
+    shoppingListName={shoppingListItems.name}
+    onAddItem={addItemHandler}
+    />
     </>
   );
 }
