@@ -5,6 +5,7 @@ import clientPromise from '../../lib/mongodb'
 import mongoose from 'mongoose';
 import { itemData } from '../../components/ShoppingList/ShoppingListItem/ShoppingListItem.types';
 import { useRouter } from 'next/router';
+import { Circles } from 'react-loader-spinner';
 
 export default function HomeList(props) {
   const shoppingListItems = JSON.parse(props.shoppingList);
@@ -44,6 +45,16 @@ useEffect(() => {
   return (
     <>
     <Header totalPrice={totalPrice}/>
+    {isRefreeshing && <Circles height="80"
+      width="60"
+      color="#1ad1b9"
+      ariaLabel="circles-loading"
+      wrapperStyle={{'display' : 'flex', 
+      'justify-content': 'center',
+      'margin-top' : '8px'
+    }}
+      wrapperClass=""
+      visible={true} /> }
     <ShoppingListLayout 
     isShoppingList 
     shoppingListItems={addedItems} 
