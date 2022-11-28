@@ -37,7 +37,7 @@ useEffect(() => {
         'Content-Type' : 'application/json'
       }
     })
-    if(result.status < 300) {
+    if (result.status < 300) {
       refreshData();
     }
   }
