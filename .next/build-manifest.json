@@ -15,11 +15,6 @@
   ],
   "rootMainFiles": [],
   "pages": {
-    "/[shoppingListTypeId]": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/[shoppingListTypeId].js"
-    ],
     "/_app": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
