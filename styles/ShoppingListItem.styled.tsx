@@ -12,6 +12,7 @@ export const Wrapper = styled.div<{isAdded: boolean}>`
   justify-content: center;
   align-items: center;
   gap: 0.3em;
+  cursor: pointer;
 
   @media(max-width: 700px) {
     width: 75px;
@@ -19,6 +20,7 @@ export const Wrapper = styled.div<{isAdded: boolean}>`
     min-width: 75px;
     gap: 0px;
   }
+
 `
 
 export const Name = styled.div`
@@ -31,11 +33,16 @@ export const Name = styled.div`
   margin-top: 0.3em;
 `
 
-export const Price = styled.div`
+export const Price = styled.input<{editMode: boolean}>`
   font-size: clamp(
     0.5rem,
     1.8vw + 0.2rem,
     1rem);;
   color: white;
+  border: ${props => props.editMode ? '1px solid #b1b1b1' : 'none' };
+  border-radius: 5px;
+  background-color: transparent;
+  text-align: center;
   padding: 0.1em;
+  width: 30%;
 `
