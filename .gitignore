@@ -22,7 +22,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .next/build-manifest.json
-.next
+.next/
 .next*
 .next/cache
 .next/static/*
