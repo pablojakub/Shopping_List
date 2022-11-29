@@ -47,15 +47,19 @@ const ShoppingListItem: React.FunctionComponent<ShoppingListItemType> = ({id, na
       <Name>{name}</Name>
       <Price
       ref={inputRef}
+      type='number'
+      min={1}
       isAdded={isAdded}
       editMode={isEditMode}
       disabled={!isEditMode} 
-      placeholder={`${priceState} zł`}
+      placeholder={`${Number.isNaN(priceState) ? 0 : priceState} zł`}
       onChange={(e) => {
-        let value = parseInt(e.target.value)
-        if(!Number.isNaN(value)) {
-          setPrice(value);
-        } 
+        let value = e.target.value
+        if(Number.isNaN(value)) {
+          return
+        } else { 
+          setPrice(parseInt(value))
+        }
         }}/>
     </Wrapper>
   )

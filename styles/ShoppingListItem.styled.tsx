@@ -57,4 +57,10 @@ export const Price = styled.input<{editMode: boolean, isAdded: boolean}>`
   &::placeholder {
     color: white;
   }
+
+  &::-webkit-outer-spin-button,
+  ::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 `
