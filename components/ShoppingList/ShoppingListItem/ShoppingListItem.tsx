@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
+import { useDetectClickOutside } from 'react-detect-click-outside';
 import Image from 'next/image'
 import { Wrapper, Name, Price } from '../../../styles/ShoppingListItem.styled'
 import { SVG_IDS } from '../../../public/constants';
@@ -7,8 +8,17 @@ import { itemData, ShoppingListItemType } from './ShoppingListItem.types';
 
 const ShoppingListItem: React.FunctionComponent<ShoppingListItemType> = ({id, name, price, quantity, iconId, isAdded, shoppingListName, onAddItem }) => {
   const [added , setIsAdded] = useState<boolean>(isAdded);
+  const [priceState, setPrice] = useState<string>(price.toString());
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
   const svgPath = SVG_IDS[iconId];
+
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const refClickOutsideWrapper = useDetectClickOutside({
+    onTriggered: () => {
+        setIsEditMode(false);
+    },
+});
 
   const addItemHandler = (data: itemData) => {
     if (!isEditMode) {
@@ -20,10 +30,14 @@ const ShoppingListItem: React.FunctionComponent<ShoppingListItemType> = ({id, na
   const onEdit = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
     setIsEditMode(true);
+    
+    if (inputRef.current !== null) {
+      inputRef.current.focus();
+    }
   }
 
   return (
-    <Wrapper onClick={() => {
+    <Wrapper ref={refClickOutsideWrapper} onClick={() => {
       addItemHandler({id, shoppingListName, isAdded})
     }} 
     isAdded={added}
@@ -32,9 +46,12 @@ const ShoppingListItem: React.FunctionComponent<ShoppingListItemType> = ({id, na
       <Image src={`/${svgPath}`} width={60} height={60}/>
       <Name>{name}</Name>
       <Price
+      ref={inputRef}
+      isAdded={isAdded}
       editMode={isEditMode}
       disabled={!isEditMode} 
-      value={`${price.toString()} zł `} />
+      value={priceState}
+      onChange={e => setPrice(e.target.value)} />
     </Wrapper>
   )
 }

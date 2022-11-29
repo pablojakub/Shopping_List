@@ -33,16 +33,24 @@ export const Name = styled.div`
   margin-top: 0.3em;
 `
 
-export const Price = styled.input<{editMode: boolean}>`
+export const Price = styled.input<{editMode: boolean, isAdded: boolean}>`
   font-size: clamp(
     0.5rem,
     1.8vw + 0.2rem,
     1rem);;
   color: white;
-  border: ${props => props.editMode ? '1px solid #b1b1b1' : 'none' };
+  border: ${props => props.editMode ? 
+  props.isAdded ? 
+  '1px solid #128d7d' : 
+  '1px solid #8d1222' : 
+  'none' };
   border-radius: 5px;
   background-color: transparent;
   text-align: center;
   padding: 0.1em;
   width: 30%;
+
+  &:focus {
+    outline: none;
+  }
 `
