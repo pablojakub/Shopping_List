@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { useDetectClickOutside } from 'react-detect-click-outside';
 import Image from 'next/image'
-import { Wrapper, Name, Price } from '../../../styles/ShoppingListItem.styled'
+import { Wrapper, Name, Price, Zipdisk } from '../../../styles/ShoppingListItem.styled'
 import { SVG_IDS } from '../../../public/constants';
 import { itemData, ShoppingListItemType } from './ShoppingListItem.types';
 
@@ -43,6 +43,7 @@ const ShoppingListItem: React.FunctionComponent<ShoppingListItemType> = ({id, na
     isAdded={added}
     onContextMenu={onEdit}
     >
+      <Zipdisk />
       <Image src={`/${svgPath}`} width={60} height={60}/>
       <Name>{name}</Name>
       <Price
