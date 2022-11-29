@@ -2,7 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-    position: relative;
+        margin: 0px;
+        position: relative;
+        right: -50px;
+        padding: 0px;
 `
 
 export const Zipdisk: React.FunctionComponent = (props) => {

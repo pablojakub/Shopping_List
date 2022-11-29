@@ -44,8 +44,8 @@ const ShoppingListItem: React.FunctionComponent<ShoppingListItemType> = ({id, na
     isAdded={added}
     onContextMenu={onEdit}
     >
-        <Image src={`/${svgPath}`} width={60} height={60}/>
-        <Zipdisk />
+      <Zipdisk />
+      <Image src={`/${svgPath}`} width={60} height={60}/>
       <Name>{name}</Name>
       <Price
       ref={inputRef}
