@@ -8,7 +8,7 @@ import { itemData, ShoppingListItemType } from './ShoppingListItem.types';
 
 const ShoppingListItem: React.FunctionComponent<ShoppingListItemType> = ({id, name, price, quantity, iconId, isAdded, shoppingListName, onAddItem }) => {
   const [added , setIsAdded] = useState<boolean>(isAdded);
-  const [priceState, setPrice] = useState<string>(price.toString());
+  const [priceState, setPrice] = useState<number>(price);
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
   const svgPath = SVG_IDS[iconId];
 
@@ -50,8 +50,13 @@ const ShoppingListItem: React.FunctionComponent<ShoppingListItemType> = ({id, na
       isAdded={isAdded}
       editMode={isEditMode}
       disabled={!isEditMode} 
-      value={priceState}
-      onChange={e => setPrice(e.target.value)} />
+      placeholder={`${priceState} zł`}
+      onChange={(e) => {
+        let value = parseInt(e.target.value)
+        if(!Number.isNaN(value)) {
+          setPrice(value);
+        } 
+        }}/>
     </Wrapper>
   )
 }

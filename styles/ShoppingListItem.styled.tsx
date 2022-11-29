@@ -53,4 +53,8 @@ export const Price = styled.input<{editMode: boolean, isAdded: boolean}>`
   &:focus {
     outline: none;
   }
+
+  &::placeholder {
+    color: white;
+  }
 `
