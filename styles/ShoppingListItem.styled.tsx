@@ -23,11 +23,6 @@ export const Wrapper = styled.div<{isAdded: boolean}>`
 
 `
 
-export const Zipdisk = styled.div`
-  position: relative;
-  
-`
-
 export const Name = styled.div`
   font-size: clamp(
     0.5rem,
