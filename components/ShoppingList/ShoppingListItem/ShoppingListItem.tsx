@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 import { useDetectClickOutside } from 'react-detect-click-outside';
 import Image from 'next/image'
 import { Zipdisk } from '../../Layout/Zipdisk';
-import { Wrapper, Name, Price } from '../../../styles/ShoppingListItem.styled'
+import { Wrapper, Name, Price, Currency, PriceWrapper } from '../../../styles/ShoppingListItem.styled'
 import { SVG_IDS } from '../../../public/constants';
 import { itemData, ShoppingListItemType } from './ShoppingListItem.types';
 
@@ -38,32 +38,39 @@ const ShoppingListItem: React.FunctionComponent<ShoppingListItemType> = ({id, na
   }
 
   return (
+    <>
+    {isEditMode && <Zipdisk /> }
     <Wrapper ref={refClickOutsideWrapper} onClick={() => {
       addItemHandler({id, shoppingListName, isAdded})
     }} 
     isAdded={added}
     onContextMenu={onEdit}
     >
-      <Zipdisk />
       <Image src={`/${svgPath}`} width={60} height={60}/>
       <Name>{name}</Name>
-      <Price
-      ref={inputRef}
-      type='number'
-      min={1}
-      isAdded={isAdded}
-      editMode={isEditMode}
-      disabled={!isEditMode} 
-      placeholder={`${Number.isNaN(priceState) ? 0 : priceState} zł`}
-      onChange={(e) => {
-        let value = e.target.value
-        if(Number.isNaN(value)) {
-          return
-        } else { 
-          setPrice(parseInt(value))
-        }
-        }}/>
+      <PriceWrapper>
+        <Price
+        ref={inputRef}
+        type='number'
+        min={1}
+        isAdded={isAdded}
+        editMode={isEditMode}
+        disabled={!isEditMode} 
+        placeholder={`${Number.isNaN(priceState) ? 0 : priceState}`}
+        onChange={(e) => {
+          let value = e.target.value
+          if(Number.isNaN(value)) {
+            return
+          } else { 
+            setPrice(parseInt(value))
+          }
+          }}/>
+          <Currency>zł</Currency>
+      </PriceWrapper>
+      
     </Wrapper>
+    </>
+    
   )
 }
 

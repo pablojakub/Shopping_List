@@ -46,7 +46,7 @@ export const Price = styled.input<{editMode: boolean, isAdded: boolean}>`
   'none' };
   border-radius: 5px;
   background-color: transparent;
-  text-align: center;
+  text-align: right;
   padding: 0.1em;
   width: 30%;
 
@@ -63,4 +63,14 @@ export const Price = styled.input<{editMode: boolean, isAdded: boolean}>`
     -webkit-appearance: none;
     margin: 0;
 }
+` 
+
+export const PriceWrapper = styled.div`
+  align-self: center;
 `
+
+export const Currency = styled.span`
+  color: white;
+` 
+
+
