@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-position: relative;
+    position: relative;
     width: fit-content;
     height: fit-content;
     transform: translateX(125%);
