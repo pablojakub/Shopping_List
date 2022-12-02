@@ -37,9 +37,13 @@ const ShoppingListItem: React.FunctionComponent<ShoppingListItemType> = ({id, na
     }
   }
 
+  const yeah = (event: React.MouseEvent<HTMLElement>) => {
+    console.log('click');
+  }
+
   return (
     <>
-    {isEditMode && <Zipdisk /> }
+    {isEditMode && <Zipdisk onClick={yeah} /> }
     <Wrapper ref={refClickOutsideWrapper} onClick={() => {
       addItemHandler({id, shoppingListName, isAdded})
     }} 
