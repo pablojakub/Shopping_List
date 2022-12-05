@@ -11,8 +11,6 @@ const handler = async (req, res) => {
     const database = client.db('shoppinglist');
     const shoppingListCollection = database.collection('shoppinglist');
 
-    console.log(price);
-
     if (isAdded !== undefined) {
       await shoppingListCollection.updateOne(
         {

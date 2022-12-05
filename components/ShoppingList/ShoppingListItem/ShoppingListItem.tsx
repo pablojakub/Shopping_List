@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDetectClickOutside } from 'react-detect-click-outside';
 import Image from 'next/image'
 import { Zipdisk } from '../../Layout/Zipdisk';
@@ -13,7 +13,7 @@ const ShoppingListItem: React.FunctionComponent<ShoppingListItemType> = ({id, na
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
   const svgPath = SVG_IDS[iconId];
 
-  const inputRef = useRef<HTMLInputElement>(null);
+  const prevValueRef = useRef<number | null>(null);
 
   const refClickOutsideWrapper = useDetectClickOutside({
     onTriggered: () => {
@@ -31,13 +31,12 @@ const ShoppingListItem: React.FunctionComponent<ShoppingListItemType> = ({id, na
   const onEdit = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
     setIsEditMode(true);
-    
-    if (inputRef.current !== null) {
-      inputRef.current.focus();
-    }
   }
 
   const editPrice = () => {
+    if (prevValueRef.current === priceState) {
+      return;
+    }
     onEditPrice({
       id: id,
       shoppingListName: shoppingListName,
@@ -45,6 +44,13 @@ const ShoppingListItem: React.FunctionComponent<ShoppingListItemType> = ({id, na
     });
     setIsEditMode(false);
   }
+
+  useEffect(() => {
+    prevValueRef.current = priceState
+  },[priceState]);
+
+  console.log(prevValueRef.current);
+  console.log(priceState);
 
   return (
     <>
@@ -58,7 +64,6 @@ const ShoppingListItem: React.FunctionComponent<ShoppingListItemType> = ({id, na
       <Name>{name}</Name>
       <PriceWrapper>
         <Price
-        ref={inputRef}
         type='number'
         min={1}
         isAdded={isAdded}
