@@ -13,7 +13,7 @@ const ShoppingListItem: React.FunctionComponent<ShoppingListItemType> = ({id, na
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
   const svgPath = SVG_IDS[iconId];
 
-  const prevValueRef = useRef<number | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const refClickOutsideWrapper = useDetectClickOutside({
     onTriggered: () => {
@@ -31,10 +31,14 @@ const ShoppingListItem: React.FunctionComponent<ShoppingListItemType> = ({id, na
   const onEdit = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
     setIsEditMode(true);
+    
+    if (inputRef.current !== null) {
+      inputRef.current.focus();
+    }
   }
 
   const editPrice = () => {
-    if (prevValueRef.current === priceState) {
+    if(priceState === price) {
       return;
     }
     onEditPrice({
@@ -44,13 +48,6 @@ const ShoppingListItem: React.FunctionComponent<ShoppingListItemType> = ({id, na
     });
     setIsEditMode(false);
   }
-
-  useEffect(() => {
-    prevValueRef.current = priceState
-  },[priceState]);
-
-  console.log(prevValueRef.current);
-  console.log(priceState);
 
   return (
     <>
@@ -64,6 +61,7 @@ const ShoppingListItem: React.FunctionComponent<ShoppingListItemType> = ({id, na
       <Name>{name}</Name>
       <PriceWrapper>
         <Price
+        ref={inputRef}
         type='number'
         min={1}
         isAdded={isAdded}
