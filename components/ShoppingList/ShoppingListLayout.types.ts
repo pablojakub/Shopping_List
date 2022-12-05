@@ -5,4 +5,5 @@ export interface ShoppingListLayoutProps {
   shoppingListName: string;
   shoppingListItems: ShoppingListItemType[];
   onAddItem: (data: itemData) => void;
+  onEditPrice: (data: itemData) => void;
 }

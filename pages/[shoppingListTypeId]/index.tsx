@@ -28,8 +28,7 @@ useEffect(() => {
   setIsRefreshing(false);
 },[props.shoppingList])
   
-  const addItemHandler = async (data: itemData) => {
-
+  const changeItemHandler = async (data: itemData) => {
     const result = await fetch('/api/editShoppingItem', {
       method: 'PUT',
       body: JSON.stringify(data),
@@ -37,10 +36,11 @@ useEffect(() => {
         'Content-Type' : 'application/json'
       }
     })
+    console.log(result);
     if (result.status < 300) {
       refreshData();
     }
-  }
+  } 
 
   return (
     <>
@@ -59,13 +59,15 @@ useEffect(() => {
     isShoppingList 
     shoppingListItems={addedItems} 
     shoppingListName={shoppingListItems.name}
-    onAddItem={addItemHandler}
+    onAddItem={changeItemHandler}
+    onEditPrice={changeItemHandler}
     />
     <ShoppingListLayout 
     isShoppingList={false} 
     shoppingListItems={availableItems}
     shoppingListName={shoppingListItems.name}
-    onAddItem={addItemHandler}
+    onAddItem={changeItemHandler}
+    onEditPrice={changeItemHandler}
     />
     </>
   );

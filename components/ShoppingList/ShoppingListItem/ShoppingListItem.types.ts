@@ -1,7 +1,8 @@
 export interface itemData {
     id: string;
     shoppingListName: string;
-    isAdded: boolean;
+    isAdded?: boolean;
+    price?: number;
   }
 
   export interface ShoppingListItemType {
@@ -12,5 +13,6 @@ export interface itemData {
     iconId: number;
     isAdded: boolean;
     shoppingListName: string;
-    onAddItem: (data: itemData) => void
+    onAddItem: (data: itemData) => void;
+    onEditPrice: (data: itemData) => void;
   }

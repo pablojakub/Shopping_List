@@ -7,7 +7,7 @@ import { SVG_IDS } from '../../../public/constants';
 import { itemData, ShoppingListItemType } from './ShoppingListItem.types';
 
 
-const ShoppingListItem: React.FunctionComponent<ShoppingListItemType> = ({id, name, price, quantity, iconId, isAdded, shoppingListName, onAddItem }) => {
+const ShoppingListItem: React.FunctionComponent<ShoppingListItemType> = ({id, name, price, quantity, iconId, isAdded, shoppingListName, onAddItem, onEditPrice }) => {
   const [added , setIsAdded] = useState<boolean>(isAdded);
   const [priceState, setPrice] = useState<number>(price);
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
@@ -37,8 +37,13 @@ const ShoppingListItem: React.FunctionComponent<ShoppingListItemType> = ({id, na
     }
   }
 
-  const yeah = () => {
-    console.log('click');
+  const editPrice = () => {
+    onEditPrice({
+      id: id,
+      shoppingListName: shoppingListName,
+      price: priceState
+    });
+    setIsEditMode(false);
   }
 
   return (
@@ -59,7 +64,7 @@ const ShoppingListItem: React.FunctionComponent<ShoppingListItemType> = ({id, na
         isAdded={isAdded}
         editMode={isEditMode}
         disabled={!isEditMode} 
-        placeholder={`${Number.isNaN(priceState) ? 0 : priceState}`}
+        value={`${Number.isNaN(priceState) ? 0 : priceState}`}
         onChange={(e) => {
           let value = e.target.value
           if(Number.isNaN(value)) {
@@ -72,7 +77,7 @@ const ShoppingListItem: React.FunctionComponent<ShoppingListItemType> = ({id, na
       </PriceWrapper>
       
     </Wrapper>
-    {isEditMode && <Zipdisk onSave={yeah}/> }
+    {isEditMode && <Zipdisk onSave={editPrice}/> }
     </>
     
   )

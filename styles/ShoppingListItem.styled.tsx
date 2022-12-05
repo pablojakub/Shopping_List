@@ -46,17 +46,13 @@ export const Price = styled.input<{editMode: boolean, isAdded: boolean}>`
   'none' };
   border-radius: 5px;
   background-color: transparent;
-  text-align: right;
+  text-align: center;
   padding: 0.1em;
-  width: 10%;
+  width: 15%;
   margin-left: auto;
 
   &:focus {
     outline: none;
-  }
-
-  &::placeholder {
-    color: white;
   }
 
   &::-webkit-outer-spin-button,
