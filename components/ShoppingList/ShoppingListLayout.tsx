@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ShoppingListLayoutProps } from './ShoppingListLayout.types';
 import ShoppingListItem from './ShoppingListItem/ShoppingListItem';
 import { ShoppingListWrapper, ShoppingListContent, ShoppingListTitle, ArrowButton } from '../../styles/ShoppingList.styled'
+import AddUnknownProductComponent from './AddUnknownProductComponent/AddUnknownProductComponent';
 
 
 
@@ -22,6 +23,7 @@ export const ShoppingListLayout: React.FunctionComponent<ShoppingListLayoutProps
           <ArrowButton menuOpen={isContentOpen} onClick={showMenuHandler}>{isContentOpen ? downArrow : leftArrow}</ArrowButton>
         </ShoppingListTitle>
         {isContentOpen && <ShoppingListContent>
+          
           {props.shoppingListItems.map((item) => (
             <ShoppingListItem 
             key={item.id}
@@ -36,6 +38,7 @@ export const ShoppingListLayout: React.FunctionComponent<ShoppingListLayoutProps
             onEditPrice={props.onEditPrice}
             />
           ))}
+          {props.isShoppingList && <AddUnknownProductComponent />}
         </ShoppingListContent>}
       </ShoppingListWrapper>
     )
