@@ -11,7 +11,7 @@ const spin = keyframes`
 `
 export const TooltipText = styled.span`
     visibility: hidden;
-    width: 200px;
+    width: 10%;
     background-color: #252424;
     color: white;
     text-align: center;
