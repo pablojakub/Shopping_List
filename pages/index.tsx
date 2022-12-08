@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import ListItem from '../components/Layout/ListItem'
 import clientPromise from '../lib/mongodb'
 
@@ -18,9 +18,26 @@ const Wrapper = styled.div`
   align-items: center;
 `
 
+const typing = keyframes`
+  from {
+    width: 0;
+  }
+` 
+
+const effect = keyframes`
+  50% {
+    border-color: transparent;
+  }
+`
+
 const WelcomeText = styled.h1`
   color: white;
+  width: 45%;
   font-size: clamp(1rem, 1.5vw + 1rem, 2.5rem);
+  border-right: 3px solid white;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: ${typing} 2s steps(21), ${effect} .5s step-end infinite alternate;
 `
 
 type ShoppingType = {
