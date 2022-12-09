@@ -6,6 +6,7 @@ import mongoose from 'mongoose';
 import { itemData } from '../../components/ShoppingList/ShoppingListItem/ShoppingListItem.types';
 import { useRouter } from 'next/router';
 import { Circles } from 'react-loader-spinner';
+import { Portal } from '../../components/Layout/Portal';
 
 export default function HomeList(props) {
   const shoppingListItems = JSON.parse(props.shoppingList);
@@ -44,6 +45,7 @@ useEffect(() => {
 
   return (
     <>
+    <Portal><p>To jest portal</p></Portal>
     <Header totalPrice={totalPrice}/>
     {isRefreeshing && <Circles height="80"
       width="60"
