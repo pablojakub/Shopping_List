@@ -1,4 +1,4 @@
-export const SVG_IDS = {
+export const SVG_IDS: SVGIDS = {
   1: 'milkmilk.svg',
   2: 'tomato.svg',
   3: 'potato.svg',
@@ -28,4 +28,8 @@ export const SVG_IDS = {
   27: 'coffee.svg',
   28: 'chocolate.svg',
   29: 'apple.svg'
+}
+
+interface SVGIDS {
+  [key: number] : string
 }
