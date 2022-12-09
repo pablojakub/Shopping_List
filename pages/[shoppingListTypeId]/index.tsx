@@ -7,6 +7,7 @@ import { itemData } from '../../components/ShoppingList/ShoppingListItem/Shoppin
 import { useRouter } from 'next/router';
 import { Circles } from 'react-loader-spinner';
 import { Portal } from '../../components/Layout/Portal';
+import Modal from '../../components/Modal/Modal';
 
 export default function HomeList(props) {
   const shoppingListItems = JSON.parse(props.shoppingList);
@@ -18,6 +19,7 @@ export default function HomeList(props) {
     .reduce((prevVal, currVal) => prevVal + currVal, 0);
 
   const [isRefreeshing, setIsRefreshing] = useState<boolean>(false);
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(true);
 
   const router = useRouter();
   const refreshData = () => {
@@ -45,7 +47,7 @@ useEffect(() => {
 
   return (
     <>
-    <Portal><p>To jest portal</p></Portal>
+    <Portal isVisible={isModalVisible}><Modal></Modal></Portal>
     <Header totalPrice={totalPrice}/>
     {isRefreeshing && <Circles height="80"
       width="60"
@@ -63,6 +65,7 @@ useEffect(() => {
     shoppingListName={shoppingListItems.name}
     onAddItem={changeItemHandler}
     onEditPrice={changeItemHandler}
+    onOpenModal={() => console.log('')}
     />
     <ShoppingListLayout 
     isShoppingList={false} 

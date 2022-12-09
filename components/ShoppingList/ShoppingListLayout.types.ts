@@ -6,4 +6,5 @@ export interface ShoppingListLayoutProps {
   shoppingListItems: ShoppingListItemType[];
   onAddItem: (data: itemData) => void;
   onEditPrice: (data: itemData) => void;
+  onOpenModal?: () => void;
 }

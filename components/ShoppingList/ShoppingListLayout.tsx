@@ -38,7 +38,7 @@ export const ShoppingListLayout: React.FunctionComponent<ShoppingListLayoutProps
             onEditPrice={props.onEditPrice}
             />
           ))}
-          {props.isShoppingList && <AddUnknownProductComponent />}
+          {props.isShoppingList && <AddUnknownProductComponent onOpenModal={props.onOpenModal} />}
         </ShoppingListContent>}
       </ShoppingListWrapper>
     )
