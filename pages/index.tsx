@@ -32,7 +32,7 @@ const effect = keyframes`
 
 const WelcomeText = styled.h1`
   color: white;
-  width: 45%;
+  width: 40%;
   font-size: clamp(1rem, 1.5vw + 1rem, 2.5rem);
   border-right: 3px solid white;
   white-space: nowrap;
