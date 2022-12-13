@@ -6,7 +6,6 @@ import mongoose from 'mongoose';
 import { itemData } from '../../components/ShoppingList/ShoppingListItem/ShoppingListItem.types';
 import { useRouter } from 'next/router';
 import { Circles } from 'react-loader-spinner';
-import { Portal } from '../../components/Layout/Portal';
 import Modal from '../../components/Modal/Modal';
 
 export default function HomeList(props) {
@@ -19,7 +18,7 @@ export default function HomeList(props) {
     .reduce((prevVal, currVal) => prevVal + currVal, 0);
 
   const [isRefreeshing, setIsRefreshing] = useState<boolean>(false);
-  const [isModalVisible, setIsModalVisible] = useState<boolean>(true);
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
   const router = useRouter();
   const refreshData = () => {
@@ -47,7 +46,7 @@ useEffect(() => {
 
   return (
     <>
-    <Portal isVisible={isModalVisible}><Modal></Modal></Portal>
+    <Modal show={isModalVisible} onClose={() => setIsModalVisible(false)}></Modal>
     <Header totalPrice={totalPrice}/>
     {isRefreeshing && <Circles height="80"
       width="60"
@@ -65,7 +64,7 @@ useEffect(() => {
     shoppingListName={shoppingListItems.name}
     onAddItem={changeItemHandler}
     onEditPrice={changeItemHandler}
-    onOpenModal={() => console.log('')}
+    onOpenModal={() => setIsModalVisible(true)}
     />
     <ShoppingListLayout 
     isShoppingList={false} 
