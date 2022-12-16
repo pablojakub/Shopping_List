@@ -26,7 +26,7 @@ export const Wrapper = styled.div`
   height: 60%;
   background-color: white;
   border-radius: 5px;
-  z-index: 2;
+  z-index: 9999;
   padding: 16px;
   overflow-x: clip;
   box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.6);

@@ -5,6 +5,8 @@ export interface itemData {
     price?: number;
   }
 
+  type onEditItemFnType = (data: itemData) => void
+
   export interface ShoppingListItemType {
     id: string;
     name: string;
@@ -13,6 +15,7 @@ export interface itemData {
     iconId: number;
     isAdded: boolean;
     shoppingListName: string;
-    onAddItem: (data: itemData) => void;
-    onEditPrice: (data: itemData) => void;
+    onAddItem: onEditItemFnType;
+    onEditPrice: onEditItemFnType;
   }
+

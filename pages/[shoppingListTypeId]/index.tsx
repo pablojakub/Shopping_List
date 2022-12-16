@@ -7,6 +7,7 @@ import { itemData } from '../../components/ShoppingList/ShoppingListItem/Shoppin
 import { useRouter } from 'next/router';
 import { Circles } from 'react-loader-spinner';
 import Modal from '../../components/Modal/Modal';
+import { newItem } from '../../components/Modal/Modal.types';
 
 export default function HomeList(props) {
   const shoppingListItems = JSON.parse(props.shoppingList);
@@ -42,11 +43,19 @@ useEffect(() => {
     if (result.status < 300) {
       refreshData();
     }
-  } 
+  };
+
+  const addNewItemHandler = (newItem: newItem) => {
+    console.log({...newItem, shoppingListName: `${shoppingListItems.name}`});
+  }
 
   return (
     <>
-    <Modal show={isModalVisible} onClose={() => setIsModalVisible(false)}></Modal>
+    <Modal
+      show={isModalVisible}
+      onClose={() => setIsModalVisible(false)}
+      onAddUnknownItem={addNewItemHandler}
+      ></Modal>
     <Header totalPrice={totalPrice}/>
     {isRefreeshing && <Circles height="80"
       width="60"
