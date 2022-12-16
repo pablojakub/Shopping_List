@@ -14,7 +14,4 @@ module.exports = {
     sourceType: "module",
     tsconfigRootDir: __dirname
   },
-  plugins: [
-    "@typescript-eslint",
-  ],
 }
