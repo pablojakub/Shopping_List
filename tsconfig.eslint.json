@@ -1,0 +1,15 @@
+{
+    "extends": "./tsconfig.json",
+    "include": [
+        // repeated from base config's "include" setting
+        "components",
+        "public/icons",
+        "public/index.tsx",
+        "pages",
+        "styles/GlobalStyles.tsx",
+        "public/icons/custom.d.ts",
+
+        // these are the eslint-only inclusions
+        ".eslintrc.js",
+    ]
+}
