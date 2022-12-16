@@ -69,7 +69,7 @@ const ShoppingListItem: React.FunctionComponent<ShoppingListItemType> = ({id, na
         disabled={!isEditMode} 
         value={`${Number.isNaN(priceState) ? 0 : priceState}`}
         onChange={(e) => {
-          let value = e.target.value
+          const value = e.target.value
           if(Number.isNaN(value)) {
             return
           } else { 

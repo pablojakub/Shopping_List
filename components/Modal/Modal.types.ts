@@ -4,7 +4,7 @@ export interface ModalProps {
     show: boolean,
     onClose: () => void;
     onAddUnknownItem: onAddUnknownItemFnType
-}; 
+}
 
 export interface newItem {
     id: string;
