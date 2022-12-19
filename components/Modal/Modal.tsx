@@ -1,4 +1,4 @@
-import React, { ReactEventHandler, ReactPortal, useEffect, useRef, useState } from 'react'
+import React, { ReactPortal, useEffect, useRef, useState } from 'react'
 import ReactDOM from 'react-dom'
 import { Overlay, ArtisticOne, ArtisticTwo, Button, ButtonWrapper, Close, Flex, Front, Input, Label, Title, Wrapper  } from './Modal.styled'
 import { ModalProps } from './Modal.types';

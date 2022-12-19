@@ -18,8 +18,9 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "baseUrl": "src",
+    "incremental": true
   },
   "compileOnSave": true,
   "include": [
@@ -33,5 +34,5 @@
   ],
   "exclude": [
     "node_modules"
-  ],
+  ]
 }

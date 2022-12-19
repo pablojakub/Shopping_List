@@ -9,14 +9,18 @@ import { Circles } from 'react-loader-spinner';
 import Modal from '../../components/Modal/Modal';
 import { newItem } from '../../components/Modal/Modal.types';
 
-export default function HomeList(props) {
+interface ShoppingListTypePageProps {
+  shoppingList: string
+}
+
+export default function HomeList(props: ShoppingListTypePageProps) {
   const shoppingListItems = JSON.parse(props.shoppingList);
-  const availableItems = shoppingListItems.shoppingList.filter(obj => obj.isAdded === false);
-  const addedItems = shoppingListItems.shoppingList.filter(obj => obj.isAdded === true);
+  const availableItems = shoppingListItems.shoppingList.filter((obj: { isAdded: boolean; }) => obj.isAdded === false);
+  const addedItems = shoppingListItems.shoppingList.filter((obj: { isAdded: boolean; }) => obj.isAdded === true);
   const totalPrice = shoppingListItems.shoppingList
-    .filter(obj => obj.isAdded === true)
-    .map(item => item.price)
-    .reduce((prevVal, currVal) => prevVal + currVal, 0);
+    .filter((obj: { isAdded: boolean; }) => obj.isAdded === true)
+    .map((item: { price: number; }) => item.price)
+    .reduce((prevVal: number, currVal: number) => prevVal + currVal, 0);
 
   const [isRefreeshing, setIsRefreshing] = useState<boolean>(false);
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
@@ -39,14 +43,25 @@ useEffect(() => {
         'Content-Type' : 'application/json'
       }
     })
-    console.log(result);
     if (result.status < 300) {
       refreshData();
     }
   };
 
-  const addNewItemHandler = (newItem: newItem) => {
-    console.log({...newItem, shoppingListName: `${shoppingListItems.name}`});
+  const addNewItemHandler = async (newItem: newItem) => {
+    const preparedObject = {...newItem, shoppingListName: `${shoppingListItems.name}`};
+
+    const result = await fetch('/api/addNewShoppingItem', {
+      method: 'POST',
+      body: JSON.stringify(preparedObject),
+      headers: {
+        'Content-Type' : 'application/json'
+      }
+    })
+
+    if (result.status < 300) {
+      refreshData();
+    }
   }
 
   return (
@@ -105,7 +120,7 @@ export async function getStaticPaths() {
   }
 }
 
-export async function getStaticProps(context) {
+export async function getStaticProps(context: { params: { shoppingListTypeId: any; }; }) {
   
  const shoppingListTypeId = context.params.shoppingListTypeId
 
