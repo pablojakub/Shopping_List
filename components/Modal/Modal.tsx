@@ -1,5 +1,6 @@
 import React, { ReactPortal, useEffect, useRef, useState } from 'react'
 import ReactDOM from 'react-dom'
+import { SVG_IDS } from '../../public/constants';
 import { Overlay, ArtisticOne, ArtisticTwo, Button, ButtonWrapper, Close, Flex, Front, Input, Label, Title, Wrapper  } from './Modal.styled'
 import { ModalProps } from './Modal.types';
 
@@ -9,6 +10,17 @@ const uuidv4 = () => {
   return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, (c: number) =>
     (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
   );
+} 
+
+const findIconByName = (name: string): number => {
+  const iconNames = Object.values(SVG_IDS);
+  const findedName = iconNames.filter(iconName => iconName.includes(name.toLowerCase().trim()))
+
+  if (findedName) {
+    const iconId = Object.keys(SVG_IDS).find(key => SVG_IDS[key as unknown as number] === findedName[0]);
+    return iconId ? parseInt(iconId) : 99
+  }
+  return 99;
 }
 
 const Modal = ({show, onClose, onAddUnknownItem } : ModalProps): ReactPortal | null => {
@@ -26,12 +38,13 @@ const Modal = ({show, onClose, onAddUnknownItem } : ModalProps): ReactPortal | n
   event.preventDefault();
 
   if (nameInputRef.current && priceInputRef.current && quantityInputRef.current) {
+
     const preparedNewItemForBackend = {
       id: uuidv4(),
       name: nameInputRef.current['value'],
       price: parseInt(priceInputRef.current['value']),
       quantity: parseInt(quantityInputRef.current['value']),
-      iconId: 99,
+      iconId: findIconByName(nameInputRef.current['value']),
       isAdded: true,
     }
     onAddUnknownItem(preparedNewItemForBackend);

@@ -27,7 +27,8 @@ export const SVG_IDS: SVGIDS = {
   26: 'tea.svg',
   27: 'coffee.svg',
   28: 'chocolate.svg',
-  29: 'apple.svg'
+  29: 'apple.svg',
+  99: 'unknown.svg'
 }
 
 interface SVGIDS {

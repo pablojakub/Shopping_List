@@ -2,5 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/[shoppingListTypeId]": "pages/[shoppingListTypeId].js"
+  "/[shoppingListTypeId]": "pages/[shoppingListTypeId].js",
+  "/api/addNewShoppingItem": "pages/api/addNewShoppingItem.js"
 }
