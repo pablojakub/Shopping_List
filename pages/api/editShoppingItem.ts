@@ -1,8 +1,9 @@
 // api/editShoppingItem
 import { Int32 } from 'mongodb';
+import { NextApiRequest, NextApiResponse } from 'next';
 import clientPromise from '../../lib/mongodb'
 
-const handler = async (req, res) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'PUT') {
     const data = req.body;
     const { id, shoppingListName, isAdded, price } = data;

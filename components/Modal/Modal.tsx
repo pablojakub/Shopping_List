@@ -23,7 +23,7 @@ const findIconByName = (name: string): number => {
   return 99;
 }
 
-const Modal = ({show, onClose, onAddUnknownItem } : ModalProps): ReactPortal | null => {
+const Modal = ({show, onClose, onAddUnknownItem, onAddNewList } : ModalProps): ReactPortal | null => {
  const [isBrowser, setIsBrowser] = useState(false);
  const nameInputRef = useRef(null);
  const priceInputRef = useRef(null);
@@ -47,7 +47,7 @@ const Modal = ({show, onClose, onAddUnknownItem } : ModalProps): ReactPortal | n
       iconId: findIconByName(nameInputRef.current['value']),
       isAdded: true,
     }
-    onAddUnknownItem(preparedNewItemForBackend);
+    onAddUnknownItem?.(preparedNewItemForBackend);
   }
   onClose();
  }
@@ -59,7 +59,7 @@ const Modal = ({show, onClose, onAddUnknownItem } : ModalProps): ReactPortal | n
             <Close onClick={onClose}>X</Close>
           </ButtonWrapper>
           <Flex onSubmit={submitHandler}>
-            <Title>Add new product</Title>
+            <Title>{onAddNewList ? 'Add new shopping list' : 'Add new product' }</Title>
             <Label>Name:</Label>
             <Input ref={nameInputRef} type={'text'}></Input>
             <Label>Price:</Label>

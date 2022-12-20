@@ -1,7 +1,8 @@
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import ListItem from '../components/Layout/ListItem'
+import Modal from '../components/Modal/Modal';
 import clientPromise from '../lib/mongodb'
 
 const Wrapper = styled.div`
@@ -47,8 +48,15 @@ type ShoppingType = {
 
 
 export default function App(props: any) {
+  
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(true);
   return (
     <Wrapper>
+      <Modal 
+      show={isModalVisible}
+      onClose={() => setIsModalVisible(false)}
+      onAddNewList={() => console.log('yeah')}
+      ></Modal>
         <WelcomeText>Your shopping lists:</WelcomeText>
         {props.shoppingLists.map((shoppingList: ShoppingType) => {
           return (
