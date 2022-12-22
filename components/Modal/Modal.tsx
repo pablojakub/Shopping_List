@@ -25,6 +25,7 @@ const findIconByName = (name: string): number => {
 
 const Modal = ({show, onClose, onAddUnknownItem, onAddNewList } : ModalProps): ReactPortal | null => {
  const [isBrowser, setIsBrowser] = useState(false);
+ const [topic, setTopic] = useState('Grocery')
  const nameInputRef = useRef(null);
  const priceInputRef = useRef(null);
  const quantityInputRef = useRef(null);
@@ -51,6 +52,13 @@ const Modal = ({show, onClose, onAddUnknownItem, onAddNewList } : ModalProps): R
   }
   onClose();
  }
+
+ const defaultValuesByTopic = {
+  Grocery: 'It contains food, vegatables drinks etc.',
+  Garden: 'Suitable for some gardening stuff',
+  Chemistry: 'Drugs, Vitamins, medical devices. Anything related to it.',
+}
+
   const modalContent = show
     ? (
       <Overlay>
@@ -58,26 +66,37 @@ const Modal = ({show, onClose, onAddUnknownItem, onAddNewList } : ModalProps): R
           <ButtonWrapper>
             <Close onClick={onClose}>X</Close>
           </ButtonWrapper>
-          <Flex onSubmit={submitHandler}>
-            <Title>{onAddNewList ? 'Add new shopping list' : 'Add new product' }</Title>
+          { onAddNewList 
+          ? <Flex onSubmit={submitHandler}>
+          <Title>Add new shopping list</Title>
+          <Select value={topic} onChange={e => setTopic(e.target.value)}>
+            <option value='Grocery'>Grocery</option>
+            <option value='Garden'>Garden</option>
+            <option value='Chemistry'>Chemistry</option>
+          </Select>
+          <textarea key={topic} defaultValue={defaultValuesByTopic[topic as keyof typeof defaultValuesByTopic]}></textarea>
+          <Button type='submit'>
+            <Front>
+            Confirm
+            </Front>
+          </Button>
+        </Flex> 
+        : 
+        <Flex>
+            <Title>'Add new product'</Title>
             <Label>Name:</Label>
-            {onAddNewList 
-            ? <Select>
-              <option>Grocery</option>
-              <option>Garden</option>
-              <option>Chemistry</option>
-            </Select>
-            : <Input ref={nameInputRef} type={'text'}></Input> }
+            <Input ref={nameInputRef} type={'text'}></Input>
             <Label>Price:</Label>
-            <Input ref={priceInputRef} type={'number'} min={0}></Input>
-            <Label>Quantity:</Label>
-            <Input ref={quantityInputRef} type={'number'} min={1}></Input>
-            <Button type='submit'>
+              <Input ref={priceInputRef} type={'number'} min={0}></Input>
+              <Label>Quantity:</Label>
+              <Input ref={quantityInputRef} type={'number'} min={1}></Input>
+              <Button type='submit'>
               <Front>
               Confirm
               </Front>
             </Button>
-          </Flex> 
+          </Flex>
+        }
         <ArtisticOne />
         <ArtisticTwo />
         </Wrapper>

@@ -1,5 +1,5 @@
 import { Wrapper } from "../../../styles/ShoppingListItem.styled"
-import styled, { keyframes } from "styled-components"
+import styled, { css, keyframes } from "styled-components"
 
 const spin = keyframes`
     from {
@@ -23,14 +23,18 @@ export const TooltipText = styled.span`
     font-size: 0.7rem;
 `
 
-export const NewProductWrapper = styled(Wrapper)`
-    background-color: '#1ad1b9';
+export const NewProductWrapper = styled(Wrapper) <{ isAdded: boolean, isOnListPage: boolean }>`
+    background-color: ${props => props.isOnListPage ? 'transparent' : '#1ad1b9' };
 
-    &:hover {
-        ${TooltipText} {
-            visibility: visible;
-        }
-    }
+    ${({ isOnListPage }) => !isOnListPage && 
+    css`
+        &:hover {
+                ${TooltipText} {
+                    visibility: visible;
+                }
+            }
+`}
+    
 
     > svg:hover {
         animation: ${spin} 300ms ease-in-out;

@@ -13,8 +13,8 @@ export const ShoppingListLayout: React.FunctionComponent<ShoppingListLayoutProps
     setisContentOpen(!isContentOpen);
   }
 
-  let leftArrow = String.fromCodePoint(0x2B62);
-  let downArrow = String.fromCodePoint(0x2193);
+  const leftArrow = String.fromCodePoint(0x2B62);
+  const downArrow = String.fromCodePoint(0x2193);
 
 
   return (
@@ -38,7 +38,7 @@ export const ShoppingListLayout: React.FunctionComponent<ShoppingListLayoutProps
             onEditPrice={props.onEditPrice}
             />
           ))}
-          {props.isShoppingList && <AddUnknownProductComponent onOpenModal={props.onOpenModal} />}
+          {props.isShoppingList && <AddUnknownProductComponent onOpenModal={props.onOpenModal} isOnListPage={false} />}
         </ShoppingListContent>}
       </ShoppingListWrapper>
     )

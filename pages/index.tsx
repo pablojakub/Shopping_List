@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import ListItem from '../components/Layout/ListItem'
 import Modal from '../components/Modal/Modal';
+import AddUnknownProductComponent from '../components/ShoppingList/AddUnknownProductComponent/AddUnknownProductComponent';
 import clientPromise from '../lib/mongodb'
 
 const Wrapper = styled.div`
@@ -46,10 +47,9 @@ type ShoppingType = {
   id: string,
 }
 
-
 export default function App(props: any) {
   
-  const [isModalVisible, setIsModalVisible] = useState<boolean>(true);
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   return (
     <Wrapper>
       <Modal 
@@ -66,6 +66,7 @@ export default function App(props: any) {
             </ListItem>
           )
         })}
+        <AddUnknownProductComponent onOpenModal={() => setIsModalVisible(true)} isOnListPage />
     </Wrapper>
   );
 }
