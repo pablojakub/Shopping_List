@@ -1,7 +1,7 @@
 import React, { ReactPortal, useEffect, useRef, useState } from 'react'
 import ReactDOM from 'react-dom'
 import { SVG_IDS } from '../../public/constants';
-import { Overlay, ArtisticOne, ArtisticTwo, Button, ButtonWrapper, Close, Flex, Front, Input, Label, Title, Wrapper  } from './Modal.styled'
+import { Overlay, ArtisticOne, ArtisticTwo, Button, ButtonWrapper, Close, Flex, Front, Input, Label, Title, Wrapper, Select } from './Modal.styled'
 import { ModalProps } from './Modal.types';
 
 
@@ -61,7 +61,13 @@ const Modal = ({show, onClose, onAddUnknownItem, onAddNewList } : ModalProps): R
           <Flex onSubmit={submitHandler}>
             <Title>{onAddNewList ? 'Add new shopping list' : 'Add new product' }</Title>
             <Label>Name:</Label>
-            <Input ref={nameInputRef} type={'text'}></Input>
+            {onAddNewList 
+            ? <Select>
+              <option>Grocery</option>
+              <option>Garden</option>
+              <option>Chemistry</option>
+            </Select>
+            : <Input ref={nameInputRef} type={'text'}></Input> }
             <Label>Price:</Label>
             <Input ref={priceInputRef} type={'number'} min={0}></Input>
             <Label>Quantity:</Label>

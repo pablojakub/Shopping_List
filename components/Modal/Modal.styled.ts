@@ -68,6 +68,7 @@ export const Title = styled.h2`
     2vw + 1rem,
     2rem
   );
+  text-align: center;
 `
 
 export const Label = styled.p`
@@ -139,4 +140,20 @@ export const ArtisticTwo = styled(ArtisticOne)`
   background: #8d1222;
   left: -20px;
   bottom: -45px;
+`
+
+export const Select = styled.select`
+  border-radius: 10px;
+  border: 1px solid #4c4a4a;
+  text-align: center;
+  color: #252424;
+  margin-top: -0.8em;
+  width: 75%;
+  height: 2em;
+
+  &:focus {
+    outline: none;
+    border: 1px solid #1ad1b9;
+  } 
+
 `
