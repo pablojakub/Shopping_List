@@ -125,7 +125,7 @@ export const Button = styled.button`
     transform: translateY(-2px);
   }
 `
- 
+
 export const ArtisticOne = styled.div`
   position: absolute;
   border-radius: 100px;
@@ -134,7 +134,7 @@ export const ArtisticOne = styled.div`
   background: #1ad1b9;
   left: -40px;
   bottom: 10px;
-` 
+`
 
 export const ArtisticTwo = styled(ArtisticOne)`
   background: #8d1222;
@@ -150,10 +150,25 @@ export const Select = styled.select`
   margin-top: -0.8em;
   width: 75%;
   height: 2em;
+  cursor: pointer;
 
   &:focus {
     outline: none;
     border: 1px solid #1ad1b9;
   } 
 
+`
+
+export const TextArea = styled.textarea`
+  border-radius: 10px;
+  border: 1px solid #4c4a4a;
+  color: #252424;
+  width: 75%;
+  height: 6rem;
+  text-align: center;
+
+  &:focus {
+    outline: none;
+    border: 1px solid #1ad1b9;
+  } 
 `

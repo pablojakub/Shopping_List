@@ -1,7 +1,7 @@
 import React, { ReactPortal, useEffect, useRef, useState } from 'react'
 import ReactDOM from 'react-dom'
 import { SVG_IDS } from '../../public/constants';
-import { Overlay, ArtisticOne, ArtisticTwo, Button, ButtonWrapper, Close, Flex, Front, Input, Label, Title, Wrapper, Select } from './Modal.styled'
+import { Overlay, ArtisticOne, ArtisticTwo, Button, ButtonWrapper, Close, Flex, Front, Input, Label, Title, Wrapper, Select, TextArea } from './Modal.styled'
 import { ModalProps } from './Modal.types';
 
 
@@ -67,14 +67,14 @@ const Modal = ({show, onClose, onAddUnknownItem, onAddNewList } : ModalProps): R
             <Close onClick={onClose}>X</Close>
           </ButtonWrapper>
           { onAddNewList 
-          ? <Flex onSubmit={submitHandler}>
+          ? <Flex>
           <Title>Add new shopping list</Title>
           <Select value={topic} onChange={e => setTopic(e.target.value)}>
             <option value='Grocery'>Grocery</option>
             <option value='Garden'>Garden</option>
             <option value='Chemistry'>Chemistry</option>
           </Select>
-          <textarea key={topic} defaultValue={defaultValuesByTopic[topic as keyof typeof defaultValuesByTopic]}></textarea>
+          <TextArea key={topic} defaultValue={defaultValuesByTopic[topic as keyof typeof defaultValuesByTopic]}></TextArea>
           <Button type='submit'>
             <Front>
             Confirm
@@ -82,7 +82,7 @@ const Modal = ({show, onClose, onAddUnknownItem, onAddNewList } : ModalProps): R
           </Button>
         </Flex> 
         : 
-        <Flex>
+        <Flex  onSubmit={submitHandler}>
             <Title>'Add new product'</Title>
             <Label>Name:</Label>
             <Input ref={nameInputRef} type={'text'}></Input>
