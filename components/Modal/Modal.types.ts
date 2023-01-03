@@ -1,10 +1,11 @@
 type onAddUnknownItemFnType = (newItem: newItem) => void;
+type onAddNewListFnType = (newList: {id: string, name: string }) => void;
 
 export interface ModalProps {
     show: boolean,
     onClose: () => void;
     onAddUnknownItem?: onAddUnknownItemFnType
-    onAddNewList?: () => void
+    onAddNewList?: onAddNewListFnType
 }
 
 export interface newItem {
@@ -16,3 +17,4 @@ export interface newItem {
     isAdded: boolean;
 }
 
+export type ActionType = 'PRODUCT' | 'LIST'

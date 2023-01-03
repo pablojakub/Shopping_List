@@ -2,8 +2,5 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/api/addNewShoppingItem": "pages/api/addNewShoppingItem.js",
-  "/[shoppingListTypeId]": "pages/[shoppingListTypeId].js",
-  "/": "pages/index.js",
-  "/api/editShoppingItem": "pages/api/editShoppingItem.js"
+  "/": "pages/index.js"
 }

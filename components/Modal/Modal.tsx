@@ -1,8 +1,8 @@
-import React, { ReactPortal, useEffect, useRef, useState } from 'react'
+import React, { FormEvent, ReactPortal, useEffect, useRef, useState } from 'react'
 import ReactDOM from 'react-dom'
 import { SVG_IDS } from '../../public/constants';
 import { Overlay, ArtisticOne, ArtisticTwo, Button, ButtonWrapper, Close, Flex, Front, Input, Label, Title, Wrapper, Select, TextArea } from './Modal.styled'
-import { ModalProps } from './Modal.types';
+import { ActionType, ModalProps } from './Modal.types';
 
 
 
@@ -35,22 +35,29 @@ const Modal = ({show, onClose, onAddUnknownItem, onAddNewList } : ModalProps): R
 
  },[])
 
- const submitHandler = (event: React.FormEvent) => {
+ const submitHandler = (event: React.FormEvent, type: ActionType) => {
   event.preventDefault();
 
-  if (nameInputRef.current && priceInputRef.current && quantityInputRef.current) {
+  switch(type) {
+    case 'PRODUCT': 
+    if (nameInputRef.current && priceInputRef.current && quantityInputRef.current) {
 
-    const preparedNewItemForBackend = {
-      id: uuidv4(),
-      name: nameInputRef.current['value'],
-      price: parseInt(priceInputRef.current['value']),
-      quantity: parseInt(quantityInputRef.current['value']),
-      iconId: findIconByName(nameInputRef.current['value']),
-      isAdded: true,
+      const preparedNewItemForBackend = {
+        id: uuidv4(),
+        name: nameInputRef.current['value'],
+        price: parseInt(priceInputRef.current['value']),
+        quantity: parseInt(quantityInputRef.current['value']),
+        iconId: findIconByName(nameInputRef.current['value']),
+        isAdded: true,
+      }
+      onAddUnknownItem?.(preparedNewItemForBackend);
+      onClose();
     }
-    onAddUnknownItem?.(preparedNewItemForBackend);
+    break;
+    case 'LIST': 
+      onAddNewList?.({ id: uuidv4(), name: topic});
+      onClose();
   }
-  onClose();
  }
 
  const defaultValuesByTopic = {
@@ -67,7 +74,7 @@ const Modal = ({show, onClose, onAddUnknownItem, onAddNewList } : ModalProps): R
             <Close onClick={onClose}>X</Close>
           </ButtonWrapper>
           { onAddNewList 
-          ? <Flex>
+          ? <Flex onSubmit={(event: FormEvent) => submitHandler(event, 'LIST')}>
           <Title>Add new shopping list</Title>
           <Select value={topic} onChange={e => setTopic(e.target.value)}>
             <option value='Grocery'>Grocery</option>
@@ -82,7 +89,7 @@ const Modal = ({show, onClose, onAddUnknownItem, onAddNewList } : ModalProps): R
           </Button>
         </Flex> 
         : 
-        <Flex  onSubmit={submitHandler}>
+        <Flex onSubmit={(event: FormEvent) => submitHandler(event, 'PRODUCT')}>
             <Title>'Add new product'</Title>
             <Label>Name:</Label>
             <Input ref={nameInputRef} type={'text'}></Input>

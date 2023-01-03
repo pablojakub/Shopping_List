@@ -66,7 +66,7 @@ export default function App(props: any) {
             </ListItem>
           )
         })}
-        <AddUnknownProductComponent onOpenModal={() => setIsModalVisible(true)} isOnListPage />
+        <AddUnknownProductComponent onOpenModal={() => setIsModalVisible(true)} isOnListPage  />
     </Wrapper>
   );
 }
