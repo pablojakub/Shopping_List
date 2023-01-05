@@ -1,5 +1,5 @@
-type onAddUnknownItemFnType = (newItem: newItem) => void;
-type onAddNewListFnType = (newList: {id: string, name: string }) => void;
+type onAddUnknownItemFnType = (newItem: NewItem) => void;
+type onAddNewListFnType = (newList: NewList) => void;
 
 export interface ModalProps {
     show: boolean,
@@ -8,13 +8,15 @@ export interface ModalProps {
     onAddNewList?: onAddNewListFnType
 }
 
-export interface newItem {
+export interface NewItem {
     id: string;
     name: string;
     price: number;
     quantity: number;
     iconId: number;
     isAdded: boolean;
-}
+} 
+
+export type NewList = Pick<NewItem, 'id' | 'name'>
 
 export type ActionType = 'PRODUCT' | 'LIST'

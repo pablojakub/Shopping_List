@@ -1,8 +1,10 @@
 import Link from 'next/link';
-import React, { useState } from 'react';
+import { useRouter } from 'next/router';
+import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import ListItem from '../components/Layout/ListItem'
 import Modal from '../components/Modal/Modal';
+import { NewList } from '../components/Modal/Modal.types';
 import AddUnknownProductComponent from '../components/ShoppingList/AddUnknownProductComponent/AddUnknownProductComponent';
 import clientPromise from '../lib/mongodb'
 
@@ -48,14 +50,38 @@ type ShoppingType = {
 }
 
 export default function App(props: any) {
-  
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+  const [isRefreeshing, setIsRefreshing] = useState<boolean>(false);
+  const router = useRouter();
+  const refreshData = () => {
+    router.replace(router.asPath);
+    setIsRefreshing(true);
+  }
+
+  const addNewListHandler = async (newList: NewList) => {
+    const result = await fetch('/api/addNewList', {
+      method: 'POST',
+      body: JSON.stringify(newList),
+      headers: {
+        'Content-Type' : 'application/json'
+      }
+    })
+
+    if (result.status < 300) {
+      refreshData();
+    }
+  }
+
+  useEffect(() => {
+    setIsRefreshing(false);
+  },[props.shoppingLists])
+
   return (
     <Wrapper>
       <Modal 
       show={isModalVisible}
       onClose={() => setIsModalVisible(false)}
-      onAddNewList={() => console.log('yeah')}
+      onAddNewList={addNewListHandler}
       ></Modal>
         <WelcomeText>Your shopping lists:</WelcomeText>
         {props.shoppingLists.map((shoppingList: ShoppingType) => {
