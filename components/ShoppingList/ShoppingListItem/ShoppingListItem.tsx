@@ -1,60 +1,71 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useDetectClickOutside } from 'react-detect-click-outside';
 import Image from 'next/image'
 import { Zipdisk } from '../../Layout/Zipdisk';
 import { Wrapper, Name, Price, Currency, PriceWrapper } from '../../../styles/ShoppingListItem.styled'
 import { SVG_IDS } from '../../../public/constants';
-import { itemData, ShoppingListItemType } from './ShoppingListItem.types';
+import { itemData, ShoppingListItemState, ShoppingListItemType } from './ShoppingListItem.types';
+import { assertState } from '../../utils/assertFunctions';
 
 
 const ShoppingListItem: React.FunctionComponent<ShoppingListItemType> = ({id, name, price, quantity, iconId, isAdded, shoppingListName, onAddItem, onEditPrice }) => {
-  const [added , setIsAdded] = useState<boolean>(isAdded);
-  const [priceState, setPrice] = useState<number>(price);
-  const [isEditMode, setIsEditMode] = useState<boolean>(false);
+  const [state, setState ] = useState<ShoppingListItemState>({ type: 'NO_EDIT_MODE', price: price, isAdded: isAdded });
+
+  if(name === 'Milk') {
+    console.log(state);
+  }
+
   const svgPath = SVG_IDS[iconId];
 
   const inputRef = useRef<HTMLInputElement>(null);
 
   const refClickOutsideWrapper = useDetectClickOutside({
     onTriggered: () => {
-        setIsEditMode(false);
+      if (state.type === 'EDIT_MODE') {
+        setState({ type: 'NO_EDIT_MODE', price: price, isAdded: isAdded })
+      }
     },
 });
 
   const addItemHandler = (data: itemData) => {
-    if (!isEditMode) {
+    if (state.type !== 'EDIT_MODE') {
+      setState({ type: 'LOADING_MODE' })
       onAddItem(data);
-      setIsAdded(!isAdded)
+      setState({ type: 'NO_EDIT_MODE', price: price, isAdded: !isAdded })
     }
   }
 
   const onEdit = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
-    setIsEditMode(true);
+    if(state.type !== "LOADING_MODE") {
+      setState({ type: 'EDIT_MODE', price: state.price, isAdded: state.isAdded })
     
-    if (inputRef.current !== null) {
-      inputRef.current.focus();
+      if (inputRef.current !== null) {
+        inputRef.current.focus();
+      }
     }
   }
 
-  const editPrice = () => {
-    if(priceState === price) {
+  const editPrice = useCallback(() => {
+    assertState(state, 'EDIT_MODE');
+    if (state.price === price) {
       return;
     }
     onEditPrice({
       id: id,
       shoppingListName: shoppingListName,
-      price: priceState
+      price: state.price
     });
-    setIsEditMode(false);
-  }
+    
+    setState({ type: 'NO_EDIT_MODE', price: state.price, isAdded: isAdded })
+  }, [state]);
 
   return (
     <>
-    <Wrapper ref={refClickOutsideWrapper} onClick={() => {
+    {state.type !== 'LOADING_MODE' && <Wrapper ref={refClickOutsideWrapper} onClick={() => {
       addItemHandler({id, shoppingListName, isAdded})
     }} 
-    isAdded={added}
+    isAdded={isAdded}
     onContextMenu={onEdit}
     >
       <Image src={`/${svgPath}`} width={60} height={60}/>
@@ -64,23 +75,23 @@ const ShoppingListItem: React.FunctionComponent<ShoppingListItemType> = ({id, na
         ref={inputRef}
         type='number'
         min={1}
-        isAdded={isAdded}
-        editMode={isEditMode}
-        disabled={!isEditMode} 
-        value={`${Number.isNaN(priceState) ? 0 : priceState}`}
+        isAdded={state.isAdded}
+        editMode={state.type}
+        disabled={state.type !== 'EDIT_MODE'} 
+        value={`${state.price}`}
         onChange={(e) => {
           const value = e.target.value
-          if(Number.isNaN(value)) {
+          if(Number.isNaN(parseInt(value))) {
             return
           } else { 
-            setPrice(parseInt(value))
+            setState({ type: 'EDIT_MODE', price: parseInt(value), isAdded: isAdded})
           }
           }}/>
           <Currency>zł</Currency>
       </PriceWrapper>
       
-    </Wrapper>
-    {isEditMode && <Zipdisk onSave={editPrice}/> }
+    </Wrapper>}
+    {state.type === 'EDIT_MODE' && <Zipdisk onSave={editPrice}/> }
     </>
     
   )

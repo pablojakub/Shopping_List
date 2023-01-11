@@ -17,5 +17,10 @@ export interface itemData {
     shoppingListName: string;
     onAddItem: onEditItemFnType;
     onEditPrice: onEditItemFnType;
-  }
+  } 
+
+  export type ShoppingListItemState = 
+  { type: 'EDIT_MODE', price: number, isAdded: boolean } | 
+  { type: 'NO_EDIT_MODE', price: number, isAdded: boolean } |
+  { type: 'LOADING_MODE'}
 

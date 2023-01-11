@@ -33,13 +33,13 @@ export const Name = styled.div`
   margin-top: 0.3em;
 `
 
-export const Price = styled.input<{editMode: boolean, isAdded: boolean}>`
+export const Price = styled.input<{editMode: string, isAdded: boolean}>`
   font-size: clamp(
     0.5rem,
     1.8vw + 0.2rem,
     1rem);;
   color: white;
-  border: ${props => props.editMode ? 
+  border: ${props => props.editMode === 'EDIT_MODE' ? 
   props.isAdded ? 
   '1px solid #128d7d' : 
   '1px solid #8d1222' : 
