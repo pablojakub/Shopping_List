@@ -9,6 +9,7 @@ import AddUnknownProductComponent from '../components/ShoppingList/AddUnknownPro
 import { ShoppingListDocument } from '../components/types/globalTypes';
 import clientPromise from '../lib/mongodb'
 
+//////////////////////////////STYLING////////////////////////////////////
 const Wrapper = styled.div`
   position: absolute;
   top: 0px;
@@ -45,6 +46,7 @@ const WelcomeText = styled.h1`
   animation: ${typing} 2s steps(21), ${effect} .5s step-end infinite alternate;
 `
 
+/////////////////////////////TYPES/////////////////////////////////
 type ShoppingListType = Pick<ShoppingListDocument, "id" | "name">
 
 type MainPageProps = {
