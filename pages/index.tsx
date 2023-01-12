@@ -103,7 +103,7 @@ export async function getStaticProps() {
   const database = client.db('shoppinglist');
   const shoppingListCollection = database.collection('shoppinglist');
 
- const shoppingLists = await shoppingListCollection.find().toArray();
+ const shoppingLists = await shoppingListCollection.find({ isDonor: false }).toArray();
 
   return {
     props: { 
