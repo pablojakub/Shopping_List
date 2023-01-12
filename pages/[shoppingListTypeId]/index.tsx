@@ -7,7 +7,7 @@ import { itemData } from '../../components/ShoppingList/ShoppingListItem/Shoppin
 import { useRouter } from 'next/router';
 import { Circles } from 'react-loader-spinner';
 import Modal from '../../components/Modal/Modal';
-import { NewItem } from '../../components/Modal/Modal.types';
+import { Product } from '../../components/types/globalTypes';
 
 interface ShoppingListTypePageProps {
   shoppingList: string
@@ -48,7 +48,7 @@ useEffect(() => {
     }
   };
 
-  const addNewItemHandler = async (newItem: NewItem) => {
+  const addNewItemHandler = async (newItem: Product) => {
     const preparedObject = {...newItem, shoppingListName: `${shoppingListItems.name}`};
 
     const result = await fetch('/api/addNewShoppingItem', {

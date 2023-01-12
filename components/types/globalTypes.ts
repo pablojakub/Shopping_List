@@ -12,4 +12,4 @@ export interface Product {
     iconId: number;
     price: number;
     isAdded: boolean;
-}
+} 

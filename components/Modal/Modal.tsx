@@ -1,16 +1,9 @@
 import React, { FormEvent, ReactPortal, useEffect, useRef, useState } from 'react'
 import ReactDOM from 'react-dom'
 import { SVG_IDS } from '../../public/constants';
+import { uuidv4 } from '../utils/createUUID';
 import { Overlay, ArtisticOne, ArtisticTwo, Button, ButtonWrapper, Close, Flex, Front, Input, Label, Title, Wrapper, Select, TextArea } from './Modal.styled'
 import { ActionType, ModalProps } from './Modal.types';
-
-
-
-const uuidv4 = () => {
-  return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, (c: number) =>
-    (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
-  );
-} 
 
 const findIconByName = (name: string): number => {
   const iconNames = Object.values(SVG_IDS);

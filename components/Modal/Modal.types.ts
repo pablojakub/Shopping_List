@@ -1,4 +1,6 @@
-type onAddUnknownItemFnType = (newItem: NewItem) => void;
+import { Product, ShoppingListDocument } from "../types/globalTypes";
+
+type onAddUnknownItemFnType = (newItem: Product) => void;
 type onAddNewListFnType = (newList: NewList) => void;
 
 export interface ModalProps {
@@ -8,15 +10,6 @@ export interface ModalProps {
     onAddNewList?: onAddNewListFnType
 }
 
-export interface NewItem {
-    id: string;
-    name: string;
-    price: number;
-    quantity: number;
-    iconId: number;
-    isAdded: boolean;
-} 
-
-export type NewList = Pick<NewItem, 'id' | 'name'>
+export type NewList = Pick<ShoppingListDocument, 'id' | 'name'>
 
 export type ActionType = 'PRODUCT' | 'LIST'
