@@ -6,6 +6,7 @@ import ListItem from '../components/Layout/ListItem'
 import Modal from '../components/Modal/Modal';
 import { NewList } from '../components/Modal/Modal.types';
 import AddUnknownProductComponent from '../components/ShoppingList/AddUnknownProductComponent/AddUnknownProductComponent';
+import { ShoppingListDocument } from '../components/types/globalTypes';
 import clientPromise from '../lib/mongodb'
 
 const Wrapper = styled.div`
@@ -44,12 +45,13 @@ const WelcomeText = styled.h1`
   animation: ${typing} 2s steps(21), ${effect} .5s step-end infinite alternate;
 `
 
-type ShoppingType = {
-  name: string,
-  id: string,
+type ShoppingListType = Pick<ShoppingListDocument, "id" | "name">
+
+type MainPageProps = {
+  shoppingLists: ShoppingListDocument[]
 }
 
-export default function App(props: any) {
+export default function App(props: MainPageProps) {
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [isRefreeshing, setIsRefreshing] = useState<boolean>(false);
   const router = useRouter();
@@ -84,7 +86,7 @@ export default function App(props: any) {
       onAddNewList={addNewListHandler}
       ></Modal>
         <WelcomeText>Your shopping lists:</WelcomeText>
-        {props.shoppingLists.map((shoppingList: ShoppingType) => {
+        {props.shoppingLists.map((shoppingList: ShoppingListType) => {
           return (
             <ListItem
               key={shoppingList.id}
