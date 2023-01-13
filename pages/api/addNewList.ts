@@ -11,12 +11,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const client = await clientPromise;
     const database = client.db('shoppinglist');
     const shoppingListCollection = database.collection('shoppinglist');
-    const dataDonor = await shoppingListCollection.findOne({ _id: data.name.toLowerCase() });
+    const dataDonor = await shoppingListCollection.findOne({ _id: data.id.toLowerCase() });
 
     if (dataDonor) {
       const mongoDbId = mongoObjectId()
       dataDonor._id = new ObjectId(mongoDbId);
       dataDonor.isDonor = false;
+      dataDonor.name = data.name;
       const result = await shoppingListCollection.insertOne(dataDonor);
 
       result.acknowledged

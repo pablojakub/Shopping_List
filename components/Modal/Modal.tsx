@@ -1,6 +1,7 @@
 import React, { FormEvent, ReactPortal, useEffect, useRef, useState } from 'react'
 import ReactDOM from 'react-dom'
 import { SVG_IDS } from '../../public/constants';
+import { ErrorTag } from '../Layout/ErrorTag';
 import { uuidv4 } from '../utils/createUUID';
 import { Overlay, ArtisticOne, ArtisticTwo, Button, ButtonWrapper, Close, Flex, Front, Input, Label, Title, Wrapper, Select, TextArea } from './Modal.styled'
 import { ActionType, ModalProps } from './Modal.types';
@@ -22,6 +23,7 @@ const Modal = ({show, onClose, onAddUnknownItem, onAddNewList } : ModalProps): R
  const nameInputRef = useRef(null);
  const priceInputRef = useRef(null);
  const quantityInputRef = useRef(null);
+ const [error, setIsError] = useState(false);
 
  useEffect(() => {
   setIsBrowser(true)
@@ -45,11 +47,21 @@ const Modal = ({show, onClose, onAddUnknownItem, onAddNewList } : ModalProps): R
       }
       onAddUnknownItem?.(preparedNewItemForBackend);
       onClose();
+      setIsError(false);
     }
+    setIsError(true)
     break;
     case 'LIST': 
-      onAddNewList?.({ id: uuidv4(), name: topic});
-      onClose();
+    if(nameInputRef.current) {
+      if(nameInputRef.current['value'] !== '') {
+        onAddNewList?.({ id: topic, name: nameInputRef.current['value'] });
+        onClose();
+        setIsError(false);
+      }
+      setIsError(true);
+      return;
+    } 
+    break;
   }
  }
 
@@ -63,17 +75,24 @@ const Modal = ({show, onClose, onAddUnknownItem, onAddNewList } : ModalProps): R
     ? (
       <Overlay>
         <Wrapper>
+          {error && <ErrorTag />}
           <ButtonWrapper>
             <Close onClick={onClose}>X</Close>
           </ButtonWrapper>
           { onAddNewList 
           ? <Flex onSubmit={(event: FormEvent) => submitHandler(event, 'LIST')}>
           <Title>Add new shopping list</Title>
-          <Select value={topic} onChange={e => setTopic(e.target.value)}>
+          <Select value={topic} onChange={(e) => {
+            setIsError(false)
+            setTopic(e.target.value)
+          }}>
             <option value='Grocery'>Grocery</option>
             <option value='Garden'>Garden</option>
             <option value='Chemistry'>Chemistry</option>
           </Select>
+          <Label>Name:</Label>
+          <Input ref={nameInputRef} type={'text'}></Input>
+          <Label>Description:</Label>
           <TextArea key={topic} defaultValue={defaultValuesByTopic[topic as keyof typeof defaultValuesByTopic]}></TextArea>
           <Button type='submit'>
             <Front>
