@@ -8,6 +8,7 @@
         "pages",
         "styles/GlobalStyles.tsx",
         "public/icons/custom.d.ts",
+        "vite.config.ts",
 
         // these are the eslint-only inclusions
         ".eslintrc.js",
