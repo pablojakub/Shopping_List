@@ -2,8 +2,9 @@ import React, { FormEvent, ReactPortal, useEffect, useRef, useState } from 'reac
 import ReactDOM from 'react-dom'
 import { SVG_IDS } from '../../public/constants';
 import { ErrorTag } from '../Layout/ErrorTag';
+import Input from '../Layout/Input';
 import { uuidv4 } from '../utils/createUUID';
-import { Overlay, ArtisticOne, ArtisticTwo, Button, ButtonWrapper, Close, Flex, Front, Input, Label, Title, Wrapper, Select, TextArea } from './Modal.styled'
+import { Overlay, ArtisticOne, ArtisticTwo, Button, ButtonWrapper, Close, Flex, Front, Label, Title, Wrapper, Select, TextArea } from './Modal.styled'
 import { ActionType, ModalProps } from './Modal.types';
 
 const findIconByName = (name: string): number => {
@@ -102,7 +103,7 @@ const Modal = ({show, onClose, onAddUnknownItem, onAddNewList } : ModalProps): R
         </Flex> 
         : 
         <Flex onSubmit={(event: FormEvent) => submitHandler(event, 'PRODUCT')}>
-            <Title>'Add new product'</Title>
+            <Title>Add new product</Title>
             <Label>Name:</Label>
             <Input ref={nameInputRef} type={'text'}></Input>
             <Label>Price:</Label>

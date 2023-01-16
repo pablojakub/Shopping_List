@@ -80,24 +80,6 @@ export const Label = styled.p`
   );
 `
 
-export const Input = styled.input`
-  border-radius: 10px;
-  border: 1px solid #4c4a4a;
-  text-align: center;
-  color: #252424;
-  margin-top: -0.8em;
-
-  &:focus {
-    outline: none;
-    border: 1px solid #1ad1b9;
-  } 
-
-  &::-webkit-outer-spin-button,
-  ::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-`
 export const Front = styled.span`
   display: block;
   padding: 10px 32px;
