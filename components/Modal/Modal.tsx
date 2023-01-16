@@ -2,7 +2,7 @@ import React, { FormEvent, ReactPortal, useEffect, useRef, useState } from 'reac
 import ReactDOM from 'react-dom'
 import { SVG_IDS } from '../../public/constants';
 import { ErrorTag } from '../Layout/ErrorTag';
-import Input from '../Layout/Input';
+import Input from '../Layout/Input/Input';
 import { uuidv4 } from '../utils/createUUID';
 import { Overlay, ArtisticOne, ArtisticTwo, Button, ButtonWrapper, Close, Flex, Front, Label, Title, Wrapper, Select, TextArea } from './Modal.styled'
 import { ActionType, ModalProps } from './Modal.types';
