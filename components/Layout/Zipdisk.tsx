@@ -7,7 +7,7 @@ export interface ZipDiskProps extends React.SVGProps<SVGSVGElement>  {
 export const Zipdisk: React.FunctionComponent<ZipDiskProps> = ({onSave}) => {
 
     return (
-    <svg style={{
+    <svg data-testid='zipdisk' style={{
         "position" : "relative",
         "top" : "0px",
         "left" : "0px",

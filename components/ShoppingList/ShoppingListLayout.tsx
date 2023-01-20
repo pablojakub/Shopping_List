@@ -22,7 +22,7 @@ export const ShoppingListLayout: React.FunctionComponent<ShoppingListLayoutProps
         <ShoppingListTitle>{props.isShoppingList ? 'Products to buy' : 'Available Products'} 
           <ArrowButton menuOpen={isContentOpen} onClick={showMenuHandler}>{isContentOpen ? downArrow : leftArrow}</ArrowButton>
         </ShoppingListTitle>
-        {isContentOpen && <ShoppingListContent>
+        {isContentOpen && <ShoppingListContent data-testid='shoppingList_content'>
           
           {props.shoppingListItems.map((item) => (
             <ShoppingListItem 

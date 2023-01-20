@@ -62,7 +62,7 @@ const ShoppingListItem: React.FunctionComponent<ShoppingListItemType> = ({id, na
 
   return (
     <>
-    {state.type !== 'LOADING_MODE' && <Wrapper ref={refClickOutsideWrapper} onClick={() => {
+    {state.type !== 'LOADING_MODE' && <Wrapper data-testid={id} ref={refClickOutsideWrapper} onClick={() => {
       addItemHandler({id, shoppingListName, isAdded})
     }} 
     isAdded={isAdded}
@@ -72,6 +72,7 @@ const ShoppingListItem: React.FunctionComponent<ShoppingListItemType> = ({id, na
       <Name>{name}</Name>
       <PriceWrapper>
         <Price
+        data-testid={`${id}-priceTest`}
         ref={inputRef}
         type='number'
         min={1}
@@ -86,7 +87,9 @@ const ShoppingListItem: React.FunctionComponent<ShoppingListItemType> = ({id, na
           } else { 
             setState({ type: 'EDIT_MODE', price: parseInt(value), isAdded: isAdded})
           }
-          }}/>
+          }}
+          
+          />
           <Currency>zł</Currency>
       </PriceWrapper>
       

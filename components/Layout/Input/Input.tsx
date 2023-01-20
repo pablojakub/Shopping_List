@@ -22,9 +22,9 @@ const InputWrapper = styled.input<{ error: boolean }>`
 }
 `
 
-interface InputProps { 
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> { 
     type: 'number' | 'text',
-    min?: number
+    min?: number,
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
@@ -42,7 +42,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         }
     }  
     }
+    min={props.min}
     onBlur={e => !e.target.value ? setError(true) : setError(false) } 
+    placeholder={props.placeholder}
     />
   )
 })
