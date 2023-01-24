@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
+import { useDetectClickOutside } from 'react-detect-click-outside';
 import styled, { keyframes } from 'styled-components';
 import ListItem from '../components/Layout/ListItem'
 import Modal from '../components/Modal/Modal';
@@ -10,7 +11,7 @@ import { ShoppingListDocument } from '../components/types/globalTypes';
 import clientPromise from '../lib/mongodb'
 
 //////////////////////////////STYLING////////////////////////////////////
-const Wrapper = styled.div`
+const ShoppingListWrappper = styled.div`
   position: absolute;
   top: 0px;
   left: 0px;
@@ -44,7 +45,9 @@ const WelcomeText = styled.h1`
   white-space: nowrap;
   overflow: hidden;
   animation: ${typing} 2s steps(21), ${effect} .5s step-end infinite alternate;
-`
+` 
+
+
 
 /////////////////////////////TYPES/////////////////////////////////
 type ShoppingListType = Pick<ShoppingListDocument, "id" | "name">
@@ -53,13 +56,16 @@ type MainPageProps = {
   shoppingLists: ShoppingListDocument[]
 }
 
+type MainPageState = 'MODAL' | 'LOADING' | 'DEFAULT'
+
 export default function App(props: MainPageProps) {
-  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
-  const [isRefreeshing, setIsRefreshing] = useState<boolean>(false);
+  const [mainPageState, setMainPageState] = useState<MainPageState>();
+ 
+
   const router = useRouter();
   const refreshData = () => {
     router.replace(router.asPath);
-    setIsRefreshing(true);
+    setMainPageState('LOADING');
   }
 
   const addNewListHandler = async (newList: NewList) => {
@@ -77,14 +83,18 @@ export default function App(props: MainPageProps) {
   }
 
   useEffect(() => {
-    setIsRefreshing(false);
-  },[props.shoppingLists])
+    setMainPageState('DEFAULT');
+  },[props.shoppingLists]);
+
+  const onDeleteList = () => {
+    console.log('jestem')
+  }
 
   return (
-    <Wrapper>
+    <ShoppingListWrappper>
       <Modal 
-      show={isModalVisible}
-      onClose={() => setIsModalVisible(false)}
+      show={mainPageState === 'MODAL'}
+      onClose={() => setMainPageState('DEFAULT')}
       onAddNewList={addNewListHandler}
       ></Modal>
         <WelcomeText>Your shopping lists:</WelcomeText>
@@ -92,12 +102,16 @@ export default function App(props: MainPageProps) {
           return (
             <ListItem
               key={shoppingList.id}
-            ><Link href={'/' + shoppingList.id}>{shoppingList.name}</Link>
+              onDelete={onDeleteList}
+              shoppingListId={shoppingList.id}
+              shoppingListName={shoppingList.name}
+            >
             </ListItem>
+            
           )
         })}
-        <AddUnknownProductComponent onOpenModal={() => setIsModalVisible(true)} isOnListPage  />
-    </Wrapper>
+        <AddUnknownProductComponent onOpenModal={() => setMainPageState('MODAL')} isOnListPage  />
+    </ShoppingListWrappper>
   );
 }
 

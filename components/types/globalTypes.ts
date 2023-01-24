@@ -3,8 +3,7 @@ export interface ShoppingListDocument {
     name: string;
     shoppingList: Product[];
     isDonor: boolean;
-}[];
-
+}
 export interface Product {
     id: string;
     name: string;
