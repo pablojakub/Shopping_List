@@ -2,6 +2,7 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import { useDetectClickOutside } from 'react-detect-click-outside';
 import styled from 'styled-components';
+import { ListItem } from '../types/globalTypes';
 
 const Wrapper = styled.div<{ editMode: boolean }>`
   --b: 100%;
@@ -42,7 +43,7 @@ export interface ListItemProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode,
   shoppingListId: string,
   shoppingListName: string,
-  onDelete: () => void
+  onDelete: (listToDelete: ListItem) => void,
 }
 
 const ListItem: React.FunctionComponent<ListItemProps> = (props) => {
@@ -59,11 +60,16 @@ const ListItem: React.FunctionComponent<ListItemProps> = (props) => {
     },
 });
 
+const listData: ListItem = {
+  id: props.shoppingListId,
+  name: props.shoppingListName
+}
+
   return (
     <Wrapper ref={refClickOutsideWrapper} onContextMenu={onEditHandler} editMode={isEdit}>
       <Circle editMode={isEdit} />
-      <Link href={isEdit ? {} : '/' + props.shoppingListId}>
-        <Name onClick={props.onDelete}>{isEdit ? 'Delete?' : props.shoppingListName}</Name></Link>
+      <Link href={isEdit ? {} : '/' + listData.id}>
+        <Name onClick={() => isEdit && props.onDelete({id: listData.id, name: listData.name})}>{isEdit ? 'Delete?' : listData.name}</Name></Link>
       <Circle editMode={isEdit} />
     </Wrapper>
   )

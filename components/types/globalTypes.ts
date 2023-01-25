@@ -11,4 +11,9 @@ export interface Product {
     iconId: number;
     price: number;
     isAdded: boolean;
-} 
+}
+
+export interface ListItem {
+    id: string,
+    name: string,
+}

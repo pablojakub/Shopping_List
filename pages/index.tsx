@@ -86,8 +86,16 @@ export default function App(props: MainPageProps) {
     setMainPageState('DEFAULT');
   },[props.shoppingLists]);
 
-  const onDeleteList = () => {
-    console.log('jestem')
+  const onDeleteList = async (listToDelete: ListItem) => {
+
+    const result = await fetch('/api/deleteList', {
+      method: 'DELETE',
+      body: JSON.stringify(listToDelete),
+      headers: {
+        'Content-Type' : 'application/json'
+      }
+    });
+    
   }
 
   return (
