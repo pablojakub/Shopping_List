@@ -25,8 +25,6 @@ const Wrapper = styled.div<{ editMode: boolean }>`
     font-size: clamp(1rem, 1.5vw + 1rem, 1.2rem);
     color: ${props => props.editMode && '#e6e6e6'}
   }
-
-
 ` 
 
 const Circle = styled.div<{editMode: boolean}>`

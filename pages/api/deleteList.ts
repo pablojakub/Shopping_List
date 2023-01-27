@@ -14,10 +14,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       const database = client.db('shoppinglist');
       const shoppingListCollection = database.collection('shoppinglist');
     const result = await shoppingListCollection.deleteOne({ _id: mongoDbId });
-    console.log(result)
-  
-      
+    if (result.deletedCount === 1) {
+      return res.status(200).json({message: 'Item deleted successfully'})
     }
+    return res.status(500)
+      
+    } 
+    return res.status(405).json('method not allowed')
   }
 
   export default handler

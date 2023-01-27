@@ -17,7 +17,7 @@ const ShoppingListWrappper = styled.div`
   left: 0px;
   right: 0px;
   bottom: 0px;
-  height: 30%;
+  height: 35%;
   width: 50%;
   margin: auto;
   display: flex;
@@ -38,16 +38,38 @@ const effect = keyframes`
 `
 
 const WelcomeText = styled.h1`
+  position: relative;
+  bottom: 0.5em;
   color: white;
-  width: 40%;
+  width: 390px;
+  min-height: 18%;
   font-size: clamp(1rem, 1.5vw + 1rem, 2.5rem);
   border-right: 3px solid white;
   white-space: nowrap;
   overflow: hidden;
   animation: ${typing} 2s steps(21), ${effect} .5s step-end infinite alternate;
+
+  @media (max-width: 1550px) {
+    width: 380px;
+  }
+
+  @media (max-width: 1200px) {
+    width: 330px;
+    min-height: 10%
+  }
+
+  @media (max-width: 1000px) {
+    width: 300px;
+  }
+
+  @media (max-width: 700px) {
+    width: 250px;
+  }
+
+  @media (max-width: 500px) {
+    width: 230px;
+  }
 ` 
-
-
 
 /////////////////////////////TYPES/////////////////////////////////
 type ShoppingListType = Pick<ShoppingListDocument, "id" | "name">
@@ -95,7 +117,10 @@ export default function App(props: MainPageProps) {
         'Content-Type' : 'application/json'
       }
     });
-    
+
+    if (result.status < 300) {
+      refreshData();
+    }
   }
 
   return (
@@ -115,7 +140,6 @@ export default function App(props: MainPageProps) {
               shoppingListName={shoppingList.name}
             >
             </ListItem>
-            
           )
         })}
         <AddUnknownProductComponent onOpenModal={() => setMainPageState('MODAL')} isOnListPage  />
