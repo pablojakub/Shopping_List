@@ -2,6 +2,15 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import FullPageLoadingSpinner from '../components/Layout/FullPageLoadingSpinner';
 import GlobalStyles from '../styles/GlobalStyles';
+import { SessionProvider } from "next-auth/react"
+import { AppProps } from 'next/app';
+import { NextComponentType, NextPageContext } from 'next';
+
+interface CustomAppPageProps {
+  Component: NextComponentType<NextPageContext, any, any>
+  session: any
+}
+
 
 const Loading = (): JSX.Element => {
   const router = useRouter();
@@ -10,11 +19,11 @@ const Loading = (): JSX.Element => {
   const spinner = <FullPageLoadingSpinner />
 
   useEffect(() => {
-    const handleStart = (url) => {
+    const handleStart = (url: string) => {
       (url !== router.asPath) && setIsLoading(true);
     };
 
-    const handleComplete = (url) => {
+    const handleComplete = (url: string) => {
       (url === router.asPath) && setIsLoading(false);
     }
     router.events.on('routeChangeStart', handleStart);
@@ -32,13 +41,13 @@ const Loading = (): JSX.Element => {
 }
 
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }: AppProps<CustomAppPageProps>) {
   return (
-    <>
+    <SessionProvider session={pageProps.session}>
           <Loading />
           <Component {...pageProps} />
           <GlobalStyles/>
-    </>
+    </SessionProvider>
 
   )
   

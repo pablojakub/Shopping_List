@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { Int32, ObjectId } from 'mongodb';
+import { ObjectId } from 'mongodb';
 import clientPromise from '../../lib/mongodb'
 import { NewList } from '../../components/Modal/Modal.types';
 import { mongoObjectId } from '../../components/utils/createUUID';
@@ -25,7 +25,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         : res.status(400).json({ message: 'Something went wrong' })
     }
   }
-
 }
 
 export default handler;

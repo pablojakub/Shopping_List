@@ -32,6 +32,8 @@
     "public/icons/custom.d.ts",
     "pages",
     "styles/types", "components/types",
+    "types",
+    "lib/auth.ts"
   ],
   "exclude": [
     "node_modules"

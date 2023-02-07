@@ -1,14 +1,15 @@
-import Link from 'next/link';
+import { getServerSession } from 'next-auth';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
-import { useDetectClickOutside } from 'react-detect-click-outside';
 import styled, { keyframes } from 'styled-components';
 import ListItem from '../components/Layout/ListItem'
 import Modal from '../components/Modal/Modal';
+import { Button } from '../components/Modal/Modal.styled';
 import { NewList } from '../components/Modal/Modal.types';
 import AddUnknownProductComponent from '../components/ShoppingList/AddUnknownProductComponent/AddUnknownProductComponent';
 import { ShoppingListDocument } from '../components/types/globalTypes';
 import clientPromise from '../lib/mongodb'
+import authOptions from './api/auth/[...nextauth]'
 
 //////////////////////////////STYLING////////////////////////////////////
 const ShoppingListWrappper = styled.div`
@@ -83,7 +84,6 @@ type MainPageState = 'MODAL' | 'LOADING' | 'DEFAULT'
 export default function App(props: MainPageProps) {
   const [mainPageState, setMainPageState] = useState<MainPageState>();
  
-
   const router = useRouter();
   const refreshData = () => {
     router.replace(router.asPath);
@@ -125,6 +125,7 @@ export default function App(props: MainPageProps) {
 
   return (
     <ShoppingListWrappper>
+      <>
       <Modal 
       show={mainPageState === 'MODAL'}
       onClose={() => setMainPageState('DEFAULT')}
@@ -143,11 +144,24 @@ export default function App(props: MainPageProps) {
           )
         })}
         <AddUnknownProductComponent onOpenModal={() => setMainPageState('MODAL')} isOnListPage  />
+      </>
     </ShoppingListWrappper>
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps(context) {
+  const session = await getServerSession(context.req, context.res, authOptions)
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/api/auth/signin',
+        permanent: false,
+      },
+    }
+  }
+
+  console.log(session);
 
   const client = await clientPromise;
   const database = client.db('shoppinglist');
@@ -162,7 +176,7 @@ export async function getStaticProps() {
         id: shoppingList._id.toString(),
       }))
      },
-     revalidate: 1
+     
   }
 }
 

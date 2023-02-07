@@ -14,4 +14,8 @@ module.exports = {
     sourceType: "module",
     tsconfigRootDir: __dirname
   },
+  rules: {
+    "@typescript-eslint/no-unsafe-call": "error",
+    "@typescript-eslint/no-implicit-any-catch": "warn",
+  }
 }
