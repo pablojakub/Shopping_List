@@ -1,10 +1,13 @@
+import { GetServerSidePropsContext } from 'next';
 import { getServerSession } from 'next-auth';
+import { useSession, signOut } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
+import Credentials from '../components/Layout/Credentials';
 import ListItem from '../components/Layout/ListItem'
 import Modal from '../components/Modal/Modal';
-import { Button } from '../components/Modal/Modal.styled';
+import { Button, Front } from '../components/Modal/Modal.styled';
 import { NewList } from '../components/Modal/Modal.types';
 import AddUnknownProductComponent from '../components/ShoppingList/AddUnknownProductComponent/AddUnknownProductComponent';
 import { ShoppingListDocument } from '../components/types/globalTypes';
@@ -24,7 +27,15 @@ const ShoppingListWrappper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+` 
+
+const FrontBtn = styled(Front)`
+  padding: 4px 18px;  
 `
+
+const ButtonWrapper = styled.div`
+  text-align: center;
+`;
 
 const typing = keyframes`
   from {
@@ -79,10 +90,21 @@ type MainPageProps = {
   shoppingLists: ShoppingListDocument[]
 }
 
-type MainPageState = 'MODAL' | 'LOADING' | 'DEFAULT'
+type MainPageState = 'MODAL' | 'LOADING' | 'DEFAULT';
+
+type Session = {
+  user: {
+    name: undefined,
+    email: string,
+    image: undefined,
+  }
+  expires: string
+}
 
 export default function App(props: MainPageProps) {
   const [mainPageState, setMainPageState] = useState<MainPageState>();
+  const session = useSession();
+  console.log(session);
  
   const router = useRouter();
   const refreshData = () => {
@@ -124,6 +146,7 @@ export default function App(props: MainPageProps) {
   }
 
   return (
+    <>
     <ShoppingListWrappper>
       <>
       <Modal 
@@ -144,13 +167,26 @@ export default function App(props: MainPageProps) {
           )
         })}
         <AddUnknownProductComponent onOpenModal={() => setMainPageState('MODAL')} isOnListPage  />
+        
       </>
     </ShoppingListWrappper>
+    <Credentials email={session.data?.user.email as string}>
+      <ButtonWrapper>
+      <Button onClick={() => signOut()}>
+          <FrontBtn>
+          Sign out
+          </FrontBtn>
+        </Button>
+      </ButtonWrapper>
+    </Credentials>
+    
+    </>
+    
   );
 }
 
-export async function getServerSideProps(context) {
-  const session = await getServerSession(context.req, context.res, authOptions)
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const session: Session | null = await getServerSession(context.req, context.res, authOptions)
 
   if (!session) {
     return {
@@ -167,7 +203,9 @@ export async function getServerSideProps(context) {
   const database = client.db('shoppinglist');
   const shoppingListCollection = database.collection('shoppinglist');
 
- const shoppingLists = await shoppingListCollection.find({ isDonor: false }).toArray();
+ const allShoppingLists = await shoppingListCollection.find({ isDonor: false }).toArray();
+ const shoppingLists = allShoppingLists.filter(el => el.email === session.user.email)
+
 
   return {
     props: { 

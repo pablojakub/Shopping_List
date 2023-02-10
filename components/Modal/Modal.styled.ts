@@ -71,7 +71,7 @@ export const Title = styled.h2`
   text-align: center;
 `
 
-export const Label = styled.p`
+export const Label = styled.label`
   color: #252424;
   font-size: clamp(
     0.5rem,

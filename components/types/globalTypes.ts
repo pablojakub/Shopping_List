@@ -1,6 +1,7 @@
 export interface ShoppingListDocument {
     id: string;
     name: string;
+    email: string;
     shoppingList: Product[];
     isDonor: boolean;
 }

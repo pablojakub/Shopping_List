@@ -1,3 +1,4 @@
+import { useSession } from 'next-auth/react';
 import React, { FormEvent, ReactPortal, useEffect, useRef, useState } from 'react'
 import ReactDOM from 'react-dom'
 import { SVG_IDS } from '../../public/constants';
@@ -25,6 +26,7 @@ const Modal = ({show, onClose, onAddUnknownItem, onAddNewList } : ModalProps): R
  const priceInputRef = useRef(null);
  const quantityInputRef = useRef(null);
  const [error, setIsError] = useState(false);
+ const session = useSession();
 
  useEffect(() => {
   setIsBrowser(true)
@@ -55,7 +57,7 @@ const Modal = ({show, onClose, onAddUnknownItem, onAddNewList } : ModalProps): R
     case 'LIST': 
     if(nameInputRef.current) {
       if(nameInputRef.current['value'] !== '') {
-        onAddNewList?.({ id: topic, name: nameInputRef.current['value'] });
+        onAddNewList?.({ id: topic, name: nameInputRef.current['value'], email: session.data?.user.email as string });
         onClose();
         setIsError(false);
       }

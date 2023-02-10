@@ -10,6 +10,6 @@ export interface ModalProps {
     onAddNewList?: onAddNewListFnType
 }
 
-export type NewList = Pick<ShoppingListDocument, 'id' | 'name'>
+export type NewList = Pick<ShoppingListDocument, 'id' | 'name' | 'email'>
 
 export type ActionType = 'PRODUCT' | 'LIST'
