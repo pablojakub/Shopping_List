@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 import { Circles } from 'react-loader-spinner';
 import Modal from '../../components/Modal/Modal';
 import { Product } from '../../components/types/globalTypes';
+import fs from "node:fs"
 
 interface ShoppingListTypePageProps {
   shoppingList: string
