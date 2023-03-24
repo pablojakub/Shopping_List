@@ -13,7 +13,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const client = await clientPromise;
     const database = client.db('shoppinglist');
     const shoppingListCollection = database.collection('shoppinglist');
-    const dataDonor = await shoppingListCollection.findOne({ _id: data.id.toLowerCase() });
+    const dataDonor = await shoppingListCollection.findOne({ id: data.id.toLowerCase() });
 
     if (dataDonor) {
       const mongoDbId = mongoObjectId()
