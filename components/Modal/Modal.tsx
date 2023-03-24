@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { useSession } from 'next-auth/react';
 import React, { FormEvent, ReactPortal, useEffect, useRef, useState } from 'react'
 import ReactDOM from 'react-dom'
