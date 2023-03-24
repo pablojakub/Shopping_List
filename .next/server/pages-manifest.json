@@ -8,8 +8,7 @@
   "/api/deleteList": "pages/api/deleteList.js",
   "/api/editShoppingItem": "pages/api/editShoppingItem.js",
   "/login": "pages/login.js",
-  "/shoppingListWrapper.spec": "pages/shoppingListWrapper.spec.js",
   "/ups": "pages/ups.js",
-  "/": "pages/index.js",
-  "/[shoppingListTypeId]": "pages/[shoppingListTypeId].js"
+  "/[shoppingListTypeId]": "pages/[shoppingListTypeId].js",
+  "/": "pages/index.js"
 }
