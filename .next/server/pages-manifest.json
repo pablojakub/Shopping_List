@@ -2,7 +2,14 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/": "pages/index.js",
+  "/api/addNewList": "pages/api/addNewList.js",
+  "/api/addNewShoppingItem": "pages/api/addNewShoppingItem.js",
   "/api/auth/[...nextauth]": "pages/api/auth/[...nextauth].js",
-  "/login": "pages/login.js"
+  "/api/deleteList": "pages/api/deleteList.js",
+  "/api/editShoppingItem": "pages/api/editShoppingItem.js",
+  "/login": "pages/login.js",
+  "/shoppingListWrapper.spec": "pages/shoppingListWrapper.spec.js",
+  "/ups": "pages/ups.js",
+  "/": "pages/index.js",
+  "/[shoppingListTypeId]": "pages/[shoppingListTypeId].js"
 }

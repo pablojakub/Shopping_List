@@ -13,8 +13,23 @@ interface ShoppingListTypePageProps {
   shoppingList: string
 }
 
+type ShoppingListItems = {
+  name: string;
+  shoppingList: {
+    id: string;
+    name: string;
+    quantity: number;
+    iconId: number;
+    price: number;
+    isAdded: boolean;
+    shoppingListName: string;
+    onAddItem: (data: itemData) => void;
+    onEditPrice: (data: itemData) => void;
+  }[]
+}
+
 export default function HomeList(props: ShoppingListTypePageProps) {
-  const shoppingListItems = JSON.parse(props.shoppingList);
+  const shoppingListItems: ShoppingListItems = JSON.parse(props.shoppingList);
   const availableItems = shoppingListItems.shoppingList.filter((obj: { isAdded: boolean; }) => obj.isAdded === false);
   const addedItems = shoppingListItems.shoppingList.filter((obj: { isAdded: boolean; }) => obj.isAdded === true);
   const totalPrice = shoppingListItems.shoppingList

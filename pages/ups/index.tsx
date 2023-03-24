@@ -1,7 +1,7 @@
 import React from 'react'
 import { ShoppingListTitle, ShoppingListWrapper } from '../../styles/ShoppingList.styled'
 
-export default function HomeList(props) {
+export default function HomeList() {
   return (
     <ShoppingListWrapper>
       <ShoppingListTitle> 
