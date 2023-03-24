@@ -7,8 +7,9 @@
   "/api/auth/[...nextauth]": "pages/api/auth/[...nextauth].js",
   "/api/deleteList": "pages/api/deleteList.js",
   "/api/editShoppingItem": "pages/api/editShoppingItem.js",
-  "/login": "pages/login.js",
-  "/ups": "pages/ups.js",
+  "/login": "pages/login.html",
+  "/ups": "pages/ups.html",
+  "/": "pages/index.js",
   "/[shoppingListTypeId]": "pages/[shoppingListTypeId].js",
-  "/": "pages/index.js"
+  "/404": "pages/404.html"
 }

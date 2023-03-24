@@ -129,7 +129,7 @@ export async function getStaticPaths() {
     fallback: 'blocking',
     paths: shoppingLists.map((shoppingList) => ({
       params: { 
-        shoppingListTypeId: shoppingList._id.toString() 
+        shoppingListTypeId: shoppingList._id.toString().trim(),
       },
     }))
   }
