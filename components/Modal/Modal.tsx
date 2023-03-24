@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom'
 import { SVG_IDS } from '../../public/constants';
 import { ErrorTag } from '../Layout/ErrorTag';
 import Input from '../Layout/Input/Input';
-import { uuidv4 } from '../utils/createUUID';
 import { Overlay, ArtisticOne, ArtisticTwo, Button, ButtonWrapper, Close, Flex, Front, Label, Title, Wrapper, Select, TextArea } from './Modal.styled'
 import { ActionType, ModalProps } from './Modal.types';
 
@@ -41,7 +40,7 @@ const Modal = ({show, onClose, onAddUnknownItem, onAddNewList } : ModalProps): R
     if (nameInputRef.current && priceInputRef.current && quantityInputRef.current) {
 
       const preparedNewItemForBackend = {
-        id: uuidv4(),
+        id: crypto.randomUUID(),
         name: nameInputRef.current['value'],
         price: parseInt(priceInputRef.current['value']),
         quantity: parseInt(quantityInputRef.current['value']),
