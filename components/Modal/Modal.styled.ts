@@ -66,9 +66,11 @@ export const Title = styled.h2`
   font-size: clamp(
     0.8rem,
     2vw + 1rem,
-    2rem
+    1.3rem
   );
   text-align: center;
+  white-space: nowrap;
+  margin: 1.2rem 0rem;
 `
 
 export const Label = styled.label`
@@ -78,6 +80,7 @@ export const Label = styled.label`
     2vw + 1rem,
     1.2rem
   );
+  margin: 0.5rem 0rem;
 `
 
 export const Front = styled.span`

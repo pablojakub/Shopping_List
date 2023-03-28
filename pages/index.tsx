@@ -5,7 +5,6 @@ import { useSession, signOut } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
-import Credentials from '../components/Layout/Credentials';
 import ListItem from '../components/Layout/ListItem'
 import Modal from '../components/Modal/Modal';
 import { Button, Front } from '../components/Modal/Modal.styled';
@@ -52,6 +51,7 @@ const effect = keyframes`
 
 const WelcomeText = styled.h1`
   position: relative;
+  padding-bottom: 2rem;
   bottom: 0.5em;
   color: white;
   width: 390px;
@@ -81,6 +81,9 @@ const WelcomeText = styled.h1`
 
   @media (max-width: 500px) {
     width: 230px;
+  }
+  @media (max-width: 375px) {
+    width: 210px;
   }
 ` 
 
@@ -148,39 +151,37 @@ export default function App(props: MainPageProps) {
 
   return (
     <>
-    <ShoppingListWrappper>
-      <>
-      <Modal 
-      show={mainPageState === 'MODAL'}
-      onClose={() => setMainPageState('DEFAULT')}
-      onAddNewList={addNewListHandler}
-      ></Modal>
-        <WelcomeText>Your shopping lists:</WelcomeText>
-        {props.shoppingLists.map((shoppingList: ShoppingListType) => {
-          return (
-            <ListItem
-              key={shoppingList.id}
-              onDelete={onDeleteList}
-              shoppingListId={shoppingList.id}
-              shoppingListName={shoppingList.name}
-            >
-            </ListItem>
-          )
-        })}
-        <AddUnknownProductComponent onOpenModal={() => setMainPageState('MODAL')} isOnListPage  />
-        
-      </>
-    </ShoppingListWrappper>
-    <Credentials email={session.data?.user.email as string}>
-      <ButtonWrapper>
-      <Button onClick={() => signOut()}>
-          <FrontBtn>
-          Sign out
-          </FrontBtn>
+      <ShoppingListWrappper>
+        <>
+        <Modal 
+        show={mainPageState === 'MODAL'}
+        onClose={() => setMainPageState('DEFAULT')}
+        onAddNewList={addNewListHandler}
+        ></Modal>
+          <WelcomeText>Your shopping lists:</WelcomeText>
+          {props.shoppingLists.map((shoppingList: ShoppingListType) => {
+            return (
+              <ListItem
+                key={shoppingList.id}
+                onDelete={onDeleteList}
+                shoppingListId={shoppingList.id}
+                shoppingListName={shoppingList.name}
+              >
+              </ListItem>
+            )
+          })}
+          <AddUnknownProductComponent onOpenModal={() => setMainPageState('MODAL')} isOnListPage  />
+          
+        </>
+        <ButtonWrapper>
+          <Button onClick={() => signOut()}>
+              <FrontBtn>
+              Sign out
+              </FrontBtn>
         </Button>
       </ButtonWrapper>
-    </Credentials>
-    
+      </ShoppingListWrappper>
+      
     </>
     
   );

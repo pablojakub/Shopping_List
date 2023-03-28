@@ -24,17 +24,19 @@ export const TooltipText = styled.span`
 `
 
 export const NewProductWrapper = styled(Wrapper) <{ isAdded: boolean, isOnListPage: boolean }>`
-    background-color: ${props => props.isOnListPage ? 'transparent' : '#1ad1b9' };
-
-    ${({ isOnListPage }) => !isOnListPage && 
-    css`
+    background-color: ${props => props.isOnListPage ? 'transparent' : '#1ad1b9'};
+    ${({ isOnListPage }) => !isOnListPage &&
+        css`
         &:hover {
                 ${TooltipText} {
                     visibility: visible;
                 }
             }
 `}
-    
+    min-width: 20%;
+    width: 20%;
+    height: 20%;
+    margin: .5rem 0rem;
 
     > svg:hover {
         animation: ${spin} 300ms ease-in-out;

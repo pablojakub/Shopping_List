@@ -8,8 +8,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
     const data: NewList = req.body;
 
-    console.log(data);
-
     const client = await clientPromise;
     const database = client.db('shoppinglist');
     const shoppingListCollection = database.collection('shoppinglist');

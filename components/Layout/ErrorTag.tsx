@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const ErrorWrapper = styled.div`
     background-color: #d11a32;
-    width: 106%;
+    width: 120%;
     margin-left: -16px;
     margin-top: -16px;
     padding: 8px;
@@ -15,9 +15,9 @@ const ErrorWrapper = styled.div`
     1.2rem
   );
 `
-
-export const ErrorTag = () => {
+ 
+export const ErrorTag = ({ text }: { text: string }) => {
   return (
-    <ErrorWrapper>Unproperly filled form</ErrorWrapper>
+    <ErrorWrapper>{text}</ErrorWrapper>
   )
 }

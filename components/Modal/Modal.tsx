@@ -26,6 +26,7 @@ const Modal = ({show, onClose, onAddUnknownItem, onAddNewList } : ModalProps): R
  const priceInputRef = useRef(null);
  const quantityInputRef = useRef(null);
  const [error, setIsError] = useState(false);
+ const [unsupported, setIsUnsupported] = useState(false);
  const session = useSession();
 
  useEffect(() => {
@@ -35,6 +36,10 @@ const Modal = ({show, onClose, onAddUnknownItem, onAddNewList } : ModalProps): R
 
  const submitHandler = (event: React.FormEvent, type: ActionType) => {
   event.preventDefault();
+
+  if (unsupported) {
+    return;
+  }
 
   switch(type) {
     case 'PRODUCT': 
@@ -78,7 +83,8 @@ const Modal = ({show, onClose, onAddUnknownItem, onAddNewList } : ModalProps): R
     ? (
       <Overlay>
         <Wrapper>
-          {error && <ErrorTag />}
+          {error && <ErrorTag text='Unproperly filled form' />}
+          {unsupported && <ErrorTag text='We dont support this type yet' />}
           <ButtonWrapper>
             <Close onClick={onClose}>X</Close>
           </ButtonWrapper>
@@ -88,6 +94,12 @@ const Modal = ({show, onClose, onAddUnknownItem, onAddNewList } : ModalProps): R
           <Select value={topic} onChange={(e) => {
             setIsError(false)
             setTopic(e.target.value)
+
+            if(e.target.value === 'Garden' || e.target.value === 'Chemistry') {
+              setIsUnsupported(true);
+            } else {
+              setIsUnsupported(false);
+            }
           }}>
             <option value='Grocery'>Grocery</option>
             <option value='Garden'>Garden</option>
