@@ -43,8 +43,7 @@ export default function HomeList(props: ShoppingListTypePageProps) {
 
   const router = useRouter();
   const refreshData = async () => {
-    await fetch("/api/revalidate?secret=3bcf6c2ceea76bd14d01ae6aecaa9232");
-    // router.replace(router.asPath);
+    router.replace(router.asPath);
     setIsRefreshing(true);
   }
 
