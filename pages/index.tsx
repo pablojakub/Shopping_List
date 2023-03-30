@@ -212,7 +212,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
         id: shoppingList._id.toString(),
       }))
      },
-     
   }
 }
 

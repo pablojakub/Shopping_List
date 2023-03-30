@@ -38,7 +38,7 @@ export default function HomeList(props: ShoppingListTypePageProps) {
     .map((item: { price: number; }) => item.price)
     .reduce((prevVal: number, currVal: number) => prevVal + currVal, 0);
 
-  const [isRefreeshing, setIsRefreshing] = useState<boolean>(true);
+  const [isRefreeshing, setIsRefreshing] = useState<boolean>(false);
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
   const router = useRouter();
@@ -48,10 +48,8 @@ export default function HomeList(props: ShoppingListTypePageProps) {
   }
 
 useEffect(() => {
-  setTimeout(() => {
     setIsRefreshing(false);
-  },1000)
-},[shoppingListItems.shoppingList])
+},[props.shoppingList])
   
   const changeItemHandler = async (data: itemData) => {
     const result = await fetch('/api/editShoppingItem', {
@@ -129,7 +127,7 @@ export async function getStaticPaths() {
   const shoppingLists = await shoppingTypesColl.find().toArray();
 
   return {
-    fallback: 'blocking',
+    fallback: false,
     paths: shoppingLists.map((shoppingList) => ({
       params: { 
         shoppingListTypeId: shoppingList._id.toString().trim(),
@@ -166,6 +164,5 @@ const serialized = JSON.stringify(selectedShoppingType);
     props: {
       shoppingList: serialized
     },
-    revalidate: 1
   }
 }

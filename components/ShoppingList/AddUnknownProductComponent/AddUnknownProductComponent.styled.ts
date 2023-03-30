@@ -26,9 +26,9 @@ export const TooltipText = styled.span`
 export const NewProductWrapper = styled(Wrapper) <{ isAdded: boolean, isOnListPage: boolean }>`
     background-color: ${props => props.isOnListPage ? 'transparent' : '#1ad1b9'};
     min-width: 20%;
-    width: 20%;
-    height: 20%;
-    margin: .5rem 0rem;
+    width: 15%;
+    height: 15%;
+    margin: 1rem 0rem;
     ${({ isOnListPage }) => !isOnListPage &&
         css`
         min-width: 150px;
