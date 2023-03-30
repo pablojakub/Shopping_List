@@ -12,10 +12,6 @@ import IconWrapper from '../../Layout/IconWrapper';
 const ShoppingListItem: React.FunctionComponent<ShoppingListItemType> = ({id, name, price, quantity, iconId, isAdded, shoppingListName, onAddItem, onEditPrice }) => {
   const [state, setState ] = useState<ShoppingListItemState>({ type: 'NO_EDIT_MODE', price: price, isAdded: isAdded });
 
-  if(name === 'Milk') {
-    console.log(state);
-  }
-
   const svgPath = SVG_IDS[iconId];
 
   const inputRef = useRef<HTMLInputElement>(null);

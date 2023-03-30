@@ -1,5 +1,4 @@
 import { GetServerSidePropsContext } from 'next';
-import fs from "node:fs"
 import { getServerSession } from 'next-auth';
 import { useSession, signOut } from 'next-auth/react';
 import { useRouter } from 'next/router';
@@ -108,8 +107,6 @@ type Session = {
 
 export default function App(props: MainPageProps) {
   const [mainPageState, setMainPageState] = useState<MainPageState>();
-  const session = useSession();
-  console.log(session);
  
   const router = useRouter();
   const refreshData = () => {

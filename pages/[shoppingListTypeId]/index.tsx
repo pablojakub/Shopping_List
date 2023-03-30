@@ -30,14 +30,15 @@ type ShoppingListItems = {
 
 export default function HomeList(props: ShoppingListTypePageProps) {
   const shoppingListItems: ShoppingListItems = JSON.parse(props.shoppingList);
-  const availableItems = shoppingListItems.shoppingList.filter((obj: { isAdded: boolean; }) => obj.isAdded === false);
-  const addedItems = shoppingListItems.shoppingList.filter((obj: { isAdded: boolean; }) => obj.isAdded === true);
+  
+  const availableItemsFromDb = shoppingListItems.shoppingList.filter((obj: { isAdded: boolean; }) => obj.isAdded === false);
+  const addedItemsFromDb = shoppingListItems.shoppingList.filter((obj: { isAdded: boolean; }) => obj.isAdded === true);
   const totalPrice = shoppingListItems.shoppingList
     .filter((obj: { isAdded: boolean; }) => obj.isAdded === true)
     .map((item: { price: number; }) => item.price)
     .reduce((prevVal: number, currVal: number) => prevVal + currVal, 0);
 
-  const [isRefreeshing, setIsRefreshing] = useState<boolean>(false);
+  const [isRefreeshing, setIsRefreshing] = useState<boolean>(true);
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
   const router = useRouter();
@@ -47,8 +48,10 @@ export default function HomeList(props: ShoppingListTypePageProps) {
   }
 
 useEffect(() => {
-  setIsRefreshing(false);
-},[props.shoppingList])
+  setTimeout(() => {
+    setIsRefreshing(false);
+  },1000)
+},[shoppingListItems.shoppingList])
   
   const changeItemHandler = async (data: itemData) => {
     const result = await fetch('/api/editShoppingItem', {
@@ -99,7 +102,7 @@ useEffect(() => {
       visible={true} /> }
     <ShoppingListLayout 
     isShoppingList 
-    shoppingListItems={addedItems} 
+    shoppingListItems={addedItemsFromDb} 
     shoppingListName={shoppingListItems.name}
     onAddItem={changeItemHandler}
     onEditPrice={changeItemHandler}
@@ -107,7 +110,7 @@ useEffect(() => {
     />
     <ShoppingListLayout 
     isShoppingList={false} 
-    shoppingListItems={availableItems}
+    shoppingListItems={availableItemsFromDb}
     shoppingListName={shoppingListItems.name}
     onAddItem={changeItemHandler}
     onEditPrice={changeItemHandler}
