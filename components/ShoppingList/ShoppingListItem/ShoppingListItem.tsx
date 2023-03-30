@@ -6,6 +6,7 @@ import { Wrapper, Name, Price, Currency, PriceWrapper } from '../../../styles/Sh
 import { SVG_IDS } from '../../../public/constants';
 import { itemData, ShoppingListItemState, ShoppingListItemType } from './ShoppingListItem.types';
 import { assertState } from '../../utils/assertFunctions';
+import IconWrapper from '../../Layout/IconWrapper';
 
 
 const ShoppingListItem: React.FunctionComponent<ShoppingListItemType> = ({id, name, price, quantity, iconId, isAdded, shoppingListName, onAddItem, onEditPrice }) => {
@@ -68,7 +69,8 @@ const ShoppingListItem: React.FunctionComponent<ShoppingListItemType> = ({id, na
     isAdded={isAdded}
     onContextMenu={onEdit}
     >
-      <Image src={`/${svgPath}`} width={60} height={60}/>
+      <IconWrapper src={svgPath}/>
+
       <Name>{name}</Name>
       <PriceWrapper>
         <Price

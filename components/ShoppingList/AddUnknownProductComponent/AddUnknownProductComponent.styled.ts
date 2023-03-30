@@ -25,18 +25,32 @@ export const TooltipText = styled.span`
 
 export const NewProductWrapper = styled(Wrapper) <{ isAdded: boolean, isOnListPage: boolean }>`
     background-color: ${props => props.isOnListPage ? 'transparent' : '#1ad1b9'};
+    min-width: 20%;
+    width: 20%;
+    height: 20%;
+    margin: .5rem 0rem;
     ${({ isOnListPage }) => !isOnListPage &&
         css`
+        min-width: 150px;
+        width: 150px;
+        margin: 0rem 0rem;
+
+        @media(max-width: 700px) {
+        width: 75px;
+        height: 75px;
+        min-width: 75px;
+        gap: 0px;
+    }
+        
+        & svg {
+            width: 50%;
+        }
         &:hover {
                 ${TooltipText} {
                     visibility: visible;
                 }
             }
 `}
-    min-width: 20%;
-    width: 20%;
-    height: 20%;
-    margin: .5rem 0rem;
 
     > svg:hover {
         animation: ${spin} 300ms ease-in-out;

@@ -30,7 +30,7 @@ margin-left: auto;
 margin-right: auto;
 
 @media(max-width: 700px) {
-  width: 90%
+  width: 80%
 }
 `
 

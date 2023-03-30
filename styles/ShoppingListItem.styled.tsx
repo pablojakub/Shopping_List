@@ -69,8 +69,10 @@ export const PriceWrapper = styled.div`
 `
 
 export const Currency = styled.span`
+  font-size: clamp(
+    0.5rem,
+    1.8vw + 0.2rem,
+    1rem);
   color: white;
   margin-right: auto;
-` 
-
-
+`

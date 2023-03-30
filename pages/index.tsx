@@ -51,7 +51,6 @@ const effect = keyframes`
 
 const WelcomeText = styled.h1`
   position: relative;
-  padding-bottom: 2rem;
   bottom: 0.5em;
   color: white;
   width: 390px;
@@ -72,7 +71,7 @@ const WelcomeText = styled.h1`
   }
 
   @media (max-width: 1000px) {
-    width: 300px;
+    width: 280px;
   }
 
   @media (max-width: 700px) {
@@ -81,9 +80,11 @@ const WelcomeText = styled.h1`
 
   @media (max-width: 500px) {
     width: 230px;
+    padding-bottom: 1rem;
   }
   @media (max-width: 375px) {
     width: 210px;
+    padding-bottom: 2rem;
   }
 ` 
 
@@ -198,8 +199,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       },
     }
   }
-
-  console.log(session);
 
   const client = await clientPromise;
   const database = client.db('shoppinglist');
