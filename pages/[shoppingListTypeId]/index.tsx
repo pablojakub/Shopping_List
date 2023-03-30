@@ -42,8 +42,9 @@ export default function HomeList(props: ShoppingListTypePageProps) {
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
   const router = useRouter();
-  const refreshData = () => {
-    router.replace(router.asPath);
+  const refreshData = async () => {
+    await fetch("/api/revalidate?secret=3bcf6c2ceea76bd14d01ae6aecaa9232");
+    // router.replace(router.asPath);
     setIsRefreshing(true);
   }
 
@@ -127,7 +128,7 @@ export async function getStaticPaths() {
   const shoppingLists = await shoppingTypesColl.find().toArray();
 
   return {
-    fallback: false,
+    fallback: 'blocking',
     paths: shoppingLists.map((shoppingList) => ({
       params: { 
         shoppingListTypeId: shoppingList._id.toString().trim(),
@@ -164,5 +165,6 @@ const serialized = JSON.stringify(selectedShoppingType);
     props: {
       shoppingList: serialized
     },
+    revalidate: 3
   }
 }

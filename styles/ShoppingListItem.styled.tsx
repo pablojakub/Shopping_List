@@ -51,6 +51,11 @@ export const Price = styled.input<{editMode: string, isAdded: boolean}>`
   width: 15%;
   margin-left: auto;
 
+  @media(max-width: 575px) {
+      margin-right: 0.1em;
+      width: 20%;
+    }
+
   &:focus {
     outline: none;
   }
