@@ -81,9 +81,9 @@ const WelcomeText = styled.h1`
     width: 230px;
     padding-bottom: 1rem;
   }
-  @media (max-width: 375px) {
+  @media (max-width: 376px) {
     width: 210px;
-    padding-bottom: 2rem;
+    padding-bottom: .5rem;
   }
 ` 
 
